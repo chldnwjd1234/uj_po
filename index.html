@@ -4,39 +4,67 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Before The Light - Portfolio</title>
-    <link rel="stylesheet" href="style.css">
-    <script src="script.js"></script>
+    <title>Before The Light - Woo Jung Portfolio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Montserrat:wght@300;400;500&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="./css/reset.css">
+    <link rel="stylesheet" href="./css/style.css">
+    <script src="./js/main.js"></script>
 </head>
 
 <body>
-    <!-- 배경 이미지 컨테이너 -->
-    <div class="background-container"></div>
+    <div class="custom_cursor"></div>
+    <nav class="hidden">
+        <a href="#hero" class="active">Skills</a>
+        <a href="#works">Works</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+    </nav>
+    <section class="hero_section" id="hero">
+        <div class="stars_container"></div>
+        <div class="city_background"></div>
+        <svg class="svg_text">
+            <defs>
+                <filter id="glow">
+                    <feGaussianBlur stdDeviation="15" result="coloredBlur" />
+                    <feMerge>
+                        <feMergeNode in="coloredBlur" />
+                        <feMergeNode in="SourceGraphic" />
+                    </feMerge>
+                </filter>
+                <radialGradient id="spotlight_gradient">
+                    <stop offset="0%" style="stop-color:white;stop-opacity:1" />
+                    <stop offset="50%" style="stop-color:white;stop-opacity:0.6" />
+                    <stop offset="100%" style="stop-color:white;stop-opacity:0" />
+                </radialGradient>
+                <mask id="mask">
+                    <circle id="spotlight_circle" cx="50%" cy="50%" r="200" fill="url(#spotlight_gradient)" />
+                </mask>
+            </defs>
+            <text x="50%" y="45%" text-anchor="middle" class="text_bg">BEFORE THE LIGHT</text>
+            <text x="50%" y="58%" text-anchor="middle" class="text_sub_bg">Woo Jung Portfolio</text>
+            <text x="50%" y="45%" text-anchor="middle" class="text_light" mask="url(#mask)" filter="url(#glow)">BEFORE
+                THE LIGHT</text>
+            <text x="50%" y="58%" text-anchor="middle" class="text_sub_light" mask="url(#mask)">Woo Jung
+                Portfolio</text>
+        </svg>
+        <div class="mouse_light"></div>
+        <div class="scroll_indicator">Scroll to begin</div>
+    </section>
 
-    <!-- 어두운 마스크 레이어 -->
-    <div class="dark-mask"></div>
-
-    <!-- 플래시라이트 효과 -->
-    <div class="flashlight"></div>
-
-    <!-- 별/빛 효과들 -->
-    <div class="stars-container"></div>
-
-    <!-- 메인 콘텐츠 -->
-    <div class="content">
-        <h1 class="main-title">
-            <span class="title-part dark">BEFORE</span>
-            <span class="title-part light">THE LIGHT</span>
-        </h1>
-        <p class="subtitle">
-            <span class="subtitle-light">Woo Jung</span>
-            <span class="subtitle-dark">Portfolio</span>
-        </p>
-    </div>
-
-    <!-- 스크롤 힌트 -->
-    <div class="scroll-hint">Scroll to begin</div>
-
+    <section class="skills_section" id="skills">
+        <div class="skills_container">
+            <div class="skill_item" data-delay="0"><span>Ps</span></div>
+            <div class="skill_item" data-delay="0.1"><span>Ai</span></div>
+            <div class="skill_item" data-delay="0.2"><span>Figma</span></div>
+            <div class="skill_item" data-delay="0.3"><span>HTML5</span></div>
+            <div class="skill_item" data-delay="0.4"><span>CSS3</span></div>
+            <div class="skill_item" data-delay="0.5"><span>JS</span></div>
+        </div>
+    </section>
 
 </body>
 
