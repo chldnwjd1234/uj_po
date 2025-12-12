@@ -1,47 +1,51 @@
 @charset "utf-8";
 
+/* ========== 기본 설정 ========== */
 body {
     font-family: 'Montserrat', sans-serif;
     overflow-x: hidden;
     cursor: none;
     scroll-behavior: smooth;
-    scroll-snap-type: y mandatory;
-    overflow-y: scroll;
+    background: linear-gradient(180deg, #0B0D17 0%, #0F1324 50%, #0B0D17 100%);
+    background-attachment: fixed;
+    min-height: 100vh;
 }
 
 body.scroll_locked {
     overflow: hidden;
 }
 
+/* ========== 커스텀 커서 ========== */
 .custom_cursor {
     position: fixed;
-    width: 40px;
-    height: 40px;
+    width: 30px;
+    height: 30px;
     background: radial-gradient(circle, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0.8) 30%, rgba(255, 255, 255, 0.3) 60%, transparent 100%);
     border-radius: 50%;
     pointer-events: none;
     z-index: 10000;
     transform: translate(-50%, -50%);
     transition: width 0.5s, height 0.5s, box-shadow 0.5s;
-    box-shadow: 0 0 20px rgba(255, 255, 255, 0.6), 0 0 40px rgba(255, 255, 255, 0.4);
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.5), 0 0 30px rgba(255, 255, 255, 0.3);
 }
 
 .custom_cursor.small {
-    width: 20px;
-    height: 20px;
-    box-shadow: 0 0 10px rgba(255, 255, 255, 0.4), 0 0 20px rgba(255, 255, 255, 0.2);
+    width: 16px;
+    height: 16px;
+    box-shadow: 0 0 8px rgba(255, 255, 255, 0.4), 0 0 16px rgba(255, 255, 255, 0.2);
 }
 
 .custom_cursor.hover {
-    width: 60px;
-    height: 60px;
+    width: 45px;
+    height: 45px;
 }
 
 .custom_cursor.small.hover {
-    width: 30px;
-    height: 30px;
+    width: 24px;
+    height: 24px;
 }
 
+/* ========== 네비게이션 ========== */
 nav {
     position: fixed;
     top: 0;
@@ -49,6 +53,7 @@ nav {
     padding: 50px 80px;
     z-index: 100;
     display: flex;
+    align-items: center;
     gap: 40px;
     opacity: 1;
     transition: opacity 0.5s ease;
@@ -59,6 +64,32 @@ nav.hidden {
     pointer-events: none;
 }
 
+nav .home_dot {
+    width: 30px;
+    height: 30px;
+    background-image: url('../asset/img/home.svg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    opacity: 0.6;
+    transition: transform 0.3s ease, opacity 0.3s ease, filter 0.3s ease;
+    cursor: pointer;
+    filter: drop-shadow(0 0 4px rgba(255, 255, 255, 0.3));
+    pointer-events: auto;
+}
+
+nav .home_dot:hover {
+    transform: scale(1.2);
+    opacity: 0.8;
+    filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.5)) drop-shadow(0 0 12px rgba(255, 255, 255, 0.3));
+}
+
+nav .home_dot.active {
+    transform: scale(1.3);
+    opacity: 1;
+    filter: drop-shadow(0 0 12px rgba(255, 255, 255, 0.7)) drop-shadow(0 0 20px rgba(255, 255, 255, 0.5)) drop-shadow(0 0 30px rgba(255, 255, 255, 0.3));
+}
+
 nav a {
     color: rgba(255, 255, 255, 0.5);
     text-decoration: none;
@@ -67,6 +98,10 @@ nav a {
     letter-spacing: 1px;
     transition: color 0.3s;
     position: relative;
+}
+
+nav a:hover {
+    color: rgba(255, 255, 255, 0.7);
 }
 
 nav a.active {
@@ -88,22 +123,12 @@ nav a.active::after {
     width: 100%;
 }
 
-nav a:hover {
-    color: rgba(255, 255, 255, 0.9);
-}
-
-nav a:hover::after {
-    width: 100%;
-}
-
+/* ========== Hero Section ========== */
 .hero_section {
     position: relative;
     width: 100vw;
     height: 100vh;
     overflow: hidden;
-    background: linear-gradient(180deg, #0B0D17 0%, #0F1324 102.96%);
-    scroll-snap-align: start;
-    scroll-snap-stop: always;
 }
 
 .stars_container {
@@ -119,6 +144,7 @@ nav a:hover::after {
     background: rgba(255, 255, 255, 0.8);
     border-radius: 50%;
     animation: twinkle 3s infinite;
+    box-shadow: 0 0 3px rgba(255, 255, 255, 0.6), 0 0 6px rgba(255, 255, 255, 0.3);
 }
 
 @keyframes twinkle {
@@ -127,11 +153,13 @@ nav a:hover::after {
     100% {
         opacity: 0.3;
         transform: scale(1);
+        box-shadow: 0 0 2px rgba(255, 255, 255, 0.4), 0 0 4px rgba(255, 255, 255, 0.2);
     }
 
     50% {
         opacity: 1;
         transform: scale(1.8);
+        box-shadow: 0 0 6px rgba(255, 255, 255, 0.8), 0 0 12px rgba(255, 255, 255, 0.4);
     }
 }
 
@@ -178,18 +206,13 @@ nav a:hover::after {
     width: 100%;
     height: 100%;
     z-index: 10;
-    transition: opacity 0.8s ease;
-}
-
-.svg_text.fade_out {
-    opacity: 0;
 }
 
 .text_bg {
     font-family: 'Playfair Display', serif;
-    font-size: 120px;
+    font-size: 130px;
     font-weight: 400;
-    fill: rgba(255, 255, 255, 0.15);
+    fill: rgba(255, 255, 255, 0.08);
     letter-spacing: 8px;
 }
 
@@ -197,13 +220,13 @@ nav a:hover::after {
     font-family: 'Montserrat', sans-serif;
     font-size: 32px;
     font-weight: 300;
-    fill: rgba(255, 255, 255, 0.1);
+    fill: rgba(255, 255, 255, 0.06);
     letter-spacing: 3px;
 }
 
 .text_light {
     font-family: 'Playfair Display', serif;
-    font-size: 120px;
+    font-size: 130px;
     font-weight: 400;
     fill: rgba(255, 255, 255, 0.95);
     letter-spacing: 8px;
@@ -228,15 +251,9 @@ nav a:hover::after {
     font-weight: 300;
     letter-spacing: 2px;
     z-index: 20;
-    text-shadow: 0 0 10px rgba(255, 255, 255, 0.8),
-        0 0 20px rgba(255, 255, 255, 0.6),
-        0 0 30px rgba(255, 255, 255, 0.4);
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.8), 0 0 20px rgba(255, 255, 255, 0.6), 0 0 30px rgba(255, 255, 255, 0.4);
     animation: float 3s ease-in-out infinite, glow_pulse 2s ease-in-out infinite;
     transition: opacity 0.5s ease;
-}
-
-.scroll_indicator.fade_out {
-    opacity: 0;
 }
 
 @keyframes float {
@@ -255,87 +272,227 @@ nav a:hover::after {
 
     0%,
     100% {
-        text-shadow: 0 0 10px rgba(255, 255, 255, 0.8),
-            0 0 20px rgba(255, 255, 255, 0.6),
-            0 0 30px rgba(255, 255, 255, 0.4);
+        text-shadow: 0 0 10px rgba(255, 255, 255, 0.8), 0 0 20px rgba(255, 255, 255, 0.6), 0 0 30px rgba(255, 255, 255, 0.4);
         opacity: 0.9;
     }
 
     50% {
-        text-shadow: 0 0 15px rgba(255, 255, 255, 1),
-            0 0 30px rgba(255, 255, 255, 0.8),
-            0 0 45px rgba(255, 255, 255, 0.6);
+        text-shadow: 0 0 15px rgba(255, 255, 255, 1), 0 0 30px rgba(255, 255, 255, 0.8), 0 0 45px rgba(255, 255, 255, 0.6);
         opacity: 1;
     }
 }
 
+/* ========== Skills Section ========== */
 .skills_section {
+    position: relative;
+    height: 100vh;
+    width: 100%;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* 배경: 떨어지는 아이콘들 (Matter.js) */
+.falling_icons_container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    opacity: 0.7;
+}
+
+.falling_icons_container canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.6)) drop-shadow(0 0 15px rgba(255, 255, 255, 0.4)) drop-shadow(0 0 25px rgba(255, 255, 255, 0.2));
+}
+
+/* 키워드 컨테이너 */
+.keywords_container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+}
+
+.section_title {
+    position: absolute;
+    top: 120px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 72px;
+    font-weight: 300;
+    color: rgba(255, 255, 255, 0.9);
+    letter-spacing: 8px;
+    text-align: center;
+    z-index: 5;
+    text-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+    opacity: 0;
+    animation: fadeInTitle 1s ease-out 4.5s forwards;
+}
+
+@keyframes fadeInTitle {
+    to {
+        opacity: 1;
+    }
+}
+
+/* 키워드 그리드 */
+.keywords_grid {
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 40px;
+    width: 90%;
+    max-width: 1400px;
+    margin-top: 80px;
+}
+
+/* 키워드 카드 - 순차 등장 */
+.keyword_card {
+    position: relative;
+    width: 280px;
+    height: 280px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0.05));
+    backdrop-filter: blur(10px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    opacity: 0;
+    transform: scale(0.8) translateY(30px);
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* 순차 등장 애니메이션 - 아이콘 떨어진 후 (5초 후 시작) */
+.keyword_card:nth-child(1) {
+    animation: slideInCard 0.8s ease-out 5s forwards;
+}
+
+.keyword_card:nth-child(2) {
+    animation: slideInCard 0.8s ease-out 5.3s forwards;
+}
+
+.keyword_card:nth-child(3) {
+    animation: slideInCard 0.8s ease-out 5.6s forwards;
+}
+
+.keyword_card:nth-child(4) {
+    animation: slideInCard 0.8s ease-out 5.9s forwards;
+}
+
+@keyframes slideInCard {
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+/* 호버/클릭 시 확대 */
+.keyword_card:hover {
+    transform: scale(1.05);
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.08));
+}
+
+.keyword_card.active {
+    transform: scale(1.3);
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.12));
+    box-shadow: 0 0 50px rgba(255, 255, 255, 0.5),
+        0 0 100px rgba(255, 255, 255, 0.3);
+    z-index: 50;
+}
+
+.keyword_front {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 1;
+    transition: opacity 0.4s;
+}
+
+.keyword_card.active .keyword_front {
+    opacity: 0;
+}
+
+.keyword_front h3 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 28px;
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.95);
+    letter-spacing: 3px;
+    text-align: center;
+    text-shadow: 0 0 15px rgba(255, 255, 255, 0.6);
+}
+
+.keyword_detail {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px;
+    opacity: 0;
+    transition: opacity 0.4s;
+}
+
+.keyword_card.active .keyword_detail {
+    opacity: 1;
+}
+
+.keyword_detail h3 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 32px;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 1);
+    letter-spacing: 3px;
+    margin-bottom: 20px;
+    text-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
+}
+
+.keyword_detail p {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 15px;
+    font-weight: 300;
+    color: rgba(255, 255, 255, 0.85);
+    line-height: 1.8;
+    text-align: center;
+    letter-spacing: 0.5px;
+}
+
+/* ========== 다른 섹션들 ========== */
+.works_section,
+.about_section,
+.contact_section {
     width: 100%;
     min-height: 100vh;
-    background: linear-gradient(180deg, #0B0D17 0%, #0F1324 102.96%);
     position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
-    scroll-snap-align: start;
+    overflow: hidden;
 }
 
-.skills_container {
-    width: 100%;
-    max-width: 1200px;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 60px;
-    padding: 100px 50px;
-}
-
-.skill_item {
-    width: 120px;
-    height: 120px;
-    border-radius: 50%;
-    background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    opacity: 0;
-    transform: translateY(-100vh);
-    box-shadow: 0 0 30px rgba(255, 255, 255, 0.3), 0 0 60px rgba(255, 255, 255, 0.2);
-}
-
-.skill_item.falling {
-    animation: fall 1.5s ease-out forwards;
-}
-
-@keyframes fall {
-    0% {
-        transform: translateY(-100vh) rotate(0deg);
-        opacity: 0;
+/* ========== 반응형 디자인 ========== */
+@media (max-width: 1400px) {
+    .keywords_grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 30px;
     }
-
-    60% {
-        opacity: 1;
-    }
-
-    85% {
-        transform: translateY(0) rotate(360deg);
-    }
-
-    92% {
-        transform: translateY(-15px) rotate(360deg);
-    }
-
-    100% {
-        transform: translateY(0) rotate(360deg);
-        opacity: 1;
-    }
-}
-
-.skill_item span {
-    font-size: 24px;
-    font-weight: 500;
-    color: rgba(255, 255, 255, 0.9);
-    text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
 }
 
 @media (max-width: 1024px) {
@@ -353,6 +510,10 @@ nav a:hover::after {
     nav {
         padding: 30px 40px;
         gap: 25px;
+    }
+
+    .section_title {
+        font-size: 56px;
     }
 }
 
@@ -375,6 +536,32 @@ nav a:hover::after {
     }
 
     nav a {
+        font-size: 14px;
+    }
+
+    .section_title {
+        font-size: 36px;
+    }
+
+    .keywords_grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .keyword_card {
+        width: 250px;
+        height: 250px;
+    }
+
+    .keyword_front h3 {
+        font-size: 24px;
+    }
+
+    .keyword_detail h3 {
+        font-size: 28px;
+    }
+
+    .keyword_detail p {
         font-size: 14px;
     }
 }

@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Before The Light - Woo Jung Portfolio</title>
+    <title>U Jung Portfolio</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
@@ -12,17 +12,21 @@
         rel="stylesheet">
     <link rel="stylesheet" href="./css/reset.css">
     <link rel="stylesheet" href="./css/style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/matter-js/0.19.0/matter.min.js"></script>
     <script src="./js/main.js"></script>
 </head>
 
 <body>
     <div class="custom_cursor"></div>
-    <nav class="hidden">
-        <a href="#hero" class="active">Skills</a>
+    <nav>
+        <div class="home_dot active"></div>
+        <a href="#skills">Focus</a>
         <a href="#works">Works</a>
         <a href="#about">About</a>
         <a href="#contact">Contact</a>
     </nav>
+
+    <!-- Hero Section -->
     <section class="hero_section" id="hero">
         <div class="stars_container"></div>
         <div class="city_background"></div>
@@ -37,33 +41,98 @@
                 </filter>
                 <radialGradient id="spotlight_gradient">
                     <stop offset="0%" style="stop-color:white;stop-opacity:1" />
-                    <stop offset="50%" style="stop-color:white;stop-opacity:0.6" />
+                    <stop offset="40%" style="stop-color:white;stop-opacity:0.7" />
                     <stop offset="100%" style="stop-color:white;stop-opacity:0" />
                 </radialGradient>
                 <mask id="mask">
                     <circle id="spotlight_circle" cx="50%" cy="50%" r="200" fill="url(#spotlight_gradient)" />
                 </mask>
             </defs>
-            <text x="50%" y="45%" text-anchor="middle" class="text_bg">BEFORE THE LIGHT</text>
-            <text x="50%" y="58%" text-anchor="middle" class="text_sub_bg">Woo Jung Portfolio</text>
-            <text x="50%" y="45%" text-anchor="middle" class="text_light" mask="url(#mask)" filter="url(#glow)">BEFORE
-                THE LIGHT</text>
-            <text x="50%" y="58%" text-anchor="middle" class="text_sub_light" mask="url(#mask)">Woo Jung
+            <text x="10%" y="43%" text-anchor="start" class="text_bg">BEFORE</text>
+            <text x="10%" y="56%" text-anchor="start" class="text_bg">THE LIGHT</text>
+            <text x="10%" y="65%" text-anchor="start" class="text_sub_bg">2025 U Jung Portfolio</text>
+            <text x="10%" y="43%" text-anchor="start" class="text_light" mask="url(#mask)"
+                filter="url(#glow)">BEFORE</text>
+            <text x="10%" y="56%" text-anchor="start" class="text_light" mask="url(#mask)" filter="url(#glow)">THE
+                LIGHT</text>
+            <text x="10%" y="65%" text-anchor="start" class="text_sub_light" mask="url(#mask)">2025 U Jung
                 Portfolio</text>
         </svg>
         <div class="mouse_light"></div>
         <div class="scroll_indicator">Scroll to begin</div>
     </section>
 
+    <!-- Skills Section -->
     <section class="skills_section" id="skills">
-        <div class="skills_container">
-            <div class="skill_item" data-delay="0"><span>Ps</span></div>
-            <div class="skill_item" data-delay="0.1"><span>Ai</span></div>
-            <div class="skill_item" data-delay="0.2"><span>Figma</span></div>
-            <div class="skill_item" data-delay="0.3"><span>HTML5</span></div>
-            <div class="skill_item" data-delay="0.4"><span>CSS3</span></div>
-            <div class="skill_item" data-delay="0.5"><span>JS</span></div>
+        <div class="stars_container"></div>
+
+        <!-- 배경: 떨어지는 스킬 아이콘들 -->
+        <div class="falling_icons_container"></div>
+
+        <!-- 전면: 키워드 카드들 -->
+        <div class="keywords_container">
+            <h2 class="section_title">Focus</h2>
+
+            <div class="keywords_grid">
+                <div class="keyword_card" data-keyword="INSIGHT">
+                    <div class="keyword_front">
+                        <h3>INSIGHT</h3>
+                    </div>
+                    <div class="keyword_detail">
+                        <h3>INSIGHT</h3>
+                        <p>사용자 행동을 깊이 이해하고<br>데이터 기반의 통찰력으로<br>문제의 본질을 파악합니다</p>
+                    </div>
+                </div>
+
+                <div class="keyword_card" data-keyword="CLARITY">
+                    <div class="keyword_front">
+                        <h3>CLARITY</h3>
+                    </div>
+                    <div class="keyword_detail">
+                        <h3>CLARITY</h3>
+                        <p>복잡한 정보를 명확하게 정리하고<br>직관적인 인터페이스로<br>사용자 경험을 단순화합니다</p>
+                    </div>
+                </div>
+
+                <div class="keyword_card" data-keyword="CRAFT">
+                    <div class="keyword_front">
+                        <h3>CRAFT</h3>
+                    </div>
+                    <div class="keyword_detail">
+                        <h3>CRAFT</h3>
+                        <p>디테일에 집중하며<br>완성도 높은 결과물을<br>만들어냅니다</p>
+                    </div>
+                </div>
+
+                <div class="keyword_card" data-keyword="GROWTH">
+                    <div class="keyword_front">
+                        <h3>GROWTH</h3>
+                    </div>
+                    <div class="keyword_detail">
+                        <h3>GROWTH</h3>
+                        <p>끊임없이 학습하고<br>새로운 기술을 탐구하며<br>지속적으로 성장합니다</p>
+                    </div>
+                </div>
+            </div>
         </div>
+    </section>
+
+    <!-- Works Section (placeholder) -->
+    <section class="works_section" id="works">
+        <div class="stars_container"></div>
+        <!-- Works 내용 추가 예정 -->
+    </section>
+
+    <!-- About Section (placeholder) -->
+    <section class="about_section" id="about">
+        <div class="stars_container"></div>
+        <!-- About 내용 추가 예정 -->
+    </section>
+
+    <!-- Contact Section (placeholder) -->
+    <section class="contact_section" id="contact">
+        <div class="stars_container"></div>
+        <!-- Contact 내용 추가 예정 -->
     </section>
 
 </body>
