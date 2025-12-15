@@ -10,6 +10,8 @@ document.addEventListener('DOMContentLoaded', () => {
     setup_scroll_effects();
     setup_nav_active();
     setup_skills_drop_trigger();
+    setup_gsap_transitions();
+    setup_project_slider();
 
     setTimeout(() => setupKeywordCards(), 100);
 });
@@ -61,23 +63,21 @@ function create_stars() {
 function setup_custom_cursor() {
     const cursor = document.querySelector('.custom_cursor');
     const links = document.querySelectorAll('a');
-    const home_dot = document.querySelector('.home_dot');
     const keyword_cards = document.querySelectorAll('.keyword_card');
 
     document.addEventListener('mousemove', (e) => {
-        cursor.style.left = `${e.clientX}px`;
-        cursor.style.top = `${e.clientY}px`;
+        gsap.to(cursor, {
+            duration: 0.3,
+            left: e.clientX,
+            top: e.clientY,
+            ease: "power2.out"
+        });
     });
 
     links.forEach(link => {
         link.addEventListener('mouseenter', () => cursor.classList.add('hover'));
         link.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
     });
-
-    if (home_dot) {
-        home_dot.addEventListener('mouseenter', () => cursor.classList.add('hover'));
-        home_dot.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
-    }
 
     keyword_cards.forEach(card => {
         card.addEventListener('mouseenter', () => cursor.classList.add('hover'));
@@ -100,11 +100,18 @@ function setup_svg_spotlight() {
         mouse_x = e.clientX;
         mouse_y = e.clientY;
 
-        spotlight_circle.setAttribute('cx', mouse_x);
-        spotlight_circle.setAttribute('cy', mouse_y);
+        gsap.to(spotlight_circle, {
+            duration: 0.5,
+            attr: { cx: mouse_x, cy: mouse_y },
+            ease: "power2.out"
+        });
 
-        mouse_light.style.left = `${mouse_x}px`;
-        mouse_light.style.top = `${mouse_y}px`;
+        gsap.to(mouse_light, {
+            duration: 0.5,
+            left: mouse_x,
+            top: mouse_y,
+            ease: "power2.out"
+        });
     });
 
     spotlight_circle.setAttribute('cx', mouse_x);
@@ -132,45 +139,27 @@ function setup_scroll_effects() {
 
         click_done = true;
 
-        let shrink_progress = 0;
-        const shrink_duration = 300;
-
-        const shrink_interval = setInterval(() => {
-            shrink_progress += 10;
-            const progress = shrink_progress / shrink_duration;
-            const current_radius = 200 - (50 * progress);
-
-            spotlight_circle.setAttribute('r', current_radius);
-
-            if (shrink_progress >= shrink_duration) {
-                clearInterval(shrink_interval);
-
-                let expand_progress = 0;
-                const expand_duration = 800;
-
-                const expand_interval = setInterval(() => {
-                    expand_progress += 10;
-                    const progress = expand_progress / expand_duration;
-
-                    let current_radius;
-                    if (progress < 0.5) {
-                        const half_progress = progress * 2;
-                        current_radius = 150 + (850 * half_progress);
-                    } else {
-                        const half_progress = (progress - 0.5) * 2;
-                        current_radius = 1000 - (800 * half_progress);
-                    }
-
-                    spotlight_circle.setAttribute('r', current_radius);
-
-                    if (expand_progress >= expand_duration) {
-                        clearInterval(expand_interval);
-                        spotlight_circle.setAttribute('r', 200);
-                        click_done = false;
-                    }
-                }, 10);
+        const tl = gsap.timeline({
+            onComplete: () => {
+                click_done = false;
             }
-        }, 10);
+        });
+
+        tl.to(spotlight_circle, {
+            duration: 0.3,
+            attr: { r: 150 },
+            ease: "power2.in"
+        })
+            .to(spotlight_circle, {
+                duration: 0.4,
+                attr: { r: 1000 },
+                ease: "power2.out"
+            })
+            .to(spotlight_circle, {
+                duration: 0.4,
+                attr: { r: 200 },
+                ease: "elastic.out(1, 0.5)"
+            });
     });
 
     window.addEventListener('wheel', (e) => {
@@ -183,57 +172,32 @@ function setup_scroll_effects() {
             if (cursor) cursor.classList.add('small');
             if (mouse_light) mouse_light.classList.add('small');
 
-            let start_time = null;
-            const duration = 2000;
+            const tl = gsap.timeline();
 
-            function animate(current_time) {
-                if (!start_time) start_time = current_time;
-                const elapsed = current_time - start_time;
-                const progress = Math.min(elapsed / duration, 1);
-
-                const eased = 1 - Math.pow(1 - progress, 3);
-                const radius = 200 + (5000 * eased);
-                spotlight_circle.setAttribute('r', radius);
-
-                if (scroll_indicator) scroll_indicator.style.opacity = 1 - eased;
-
-                if (progress < 1) requestAnimationFrame(animate);
-                else if (scroll_indicator) scroll_indicator.style.display = 'none';
-            }
-
-            requestAnimationFrame(animate);
+            tl.to(spotlight_circle, {
+                duration: 2,
+                attr: { r: 5200 },
+                ease: "power3.out"
+            })
+                .to(scroll_indicator, {
+                    duration: 2,
+                    opacity: 0,
+                    ease: "power2.out",
+                    onComplete: () => {
+                        if (scroll_indicator) scroll_indicator.style.display = 'none';
+                    }
+                }, 0);
         }
     }, { passive: true });
 }
 
-// ========== 홈 도트 클릭 ==========
-const home_dot = document.querySelector('.home_dot');
-if (home_dot) {
-    home_dot.addEventListener('click', function (e) {
-        e.preventDefault();
-
-        document.querySelectorAll('nav a').forEach(a => a.classList.remove('active'));
-        home_dot.classList.add('active');
-
-        // 맨 위로 스크롤
-        window.scrollTo({
-            top: 0,
-            behavior: 'smooth'
-        });
-    });
-}
-
 // ========== 네비게이션 클릭 ==========
-document.querySelectorAll('nav a').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
+document.querySelectorAll('nav a').forEach(link => {
+    link.addEventListener('click', function (e) {
         const href = this.getAttribute('href');
 
-        if (href.startsWith('#')) {
+        if (href && href.startsWith('#')) {
             e.preventDefault();
-
-            const home_dot = document.querySelector('.home_dot');
-            if (home_dot) home_dot.classList.remove('active');
-
             document.querySelectorAll('nav a').forEach(a => a.classList.remove('active'));
             this.classList.add('active');
 
@@ -241,7 +205,11 @@ document.querySelectorAll('nav a').forEach(anchor => {
             const target_element = document.getElementById(target_id);
 
             if (target_element) {
-                target_element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                gsap.to(window, {
+                    duration: 1,
+                    scrollTo: { y: target_element, offsetY: 0 },
+                    ease: "power2.inOut"
+                });
             }
         }
     });
@@ -251,60 +219,105 @@ document.querySelectorAll('nav a').forEach(anchor => {
 function setup_nav_active() {
     const sections = document.querySelectorAll('section[id]');
     const nav_links = document.querySelectorAll('nav a');
-    const home_dot = document.querySelector('.home_dot');
 
-    window.addEventListener('scroll', () => {
-        let current = '';
+    let currentSection = 'hero';
 
-        sections.forEach(section => {
-            const section_top = section.offsetTop;
-            if (window.scrollY >= section_top - 200) current = section.getAttribute('id');
+    // ScrollTrigger를 사용한 섹션 감지
+    gsap.registerPlugin(ScrollTrigger);
+
+    sections.forEach(section => {
+        ScrollTrigger.create({
+            trigger: section,
+            start: "top center",
+            end: "bottom center",
+            onEnter: () => {
+                currentSection = section.getAttribute('id');
+                updateNav();
+            },
+            onEnterBack: () => {
+                currentSection = section.getAttribute('id');
+                updateNav();
+            }
         });
-
-        if (window.scrollY < 100) {
-            if (home_dot) home_dot.classList.add('active');
-            nav_links.forEach(link => link.classList.remove('active'));
-        } else {
-            if (home_dot) home_dot.classList.remove('active');
-
-            nav_links.forEach(link => {
-                link.classList.remove('active');
-                if (link.getAttribute('href') === `#${current}`) link.classList.add('active');
-            });
-        }
     });
+
+    function updateNav() {
+        nav_links.forEach(link => {
+            link.classList.remove('active');
+            if (link.getAttribute('href') === `#${currentSection}`) {
+                link.classList.add('active');
+            }
+        });
+    }
+
+    // 초기 상태
+    updateNav();
 }
 
-// ========== ✅ 키워드 카드 인터랙션 (클릭/호버만) ==========
+// ========== 키워드 카드 인터랙션 ==========
 function setupKeywordCards() {
     const cards = document.querySelectorAll('.keyword_card');
     if (cards.length === 0) return;
 
     cards.forEach(card => {
-        card.addEventListener('click', (e) => {
-            e.stopPropagation();
+        card.addEventListener('mouseenter', () => {
+            gsap.to(card, {
+                scale: 1.08,
+                duration: 0.4,
+                ease: "power2.out"
+            });
 
-            // 다른 카드들 닫기
+            card.classList.add('active');
             cards.forEach(c => {
                 if (c !== card) c.classList.remove('active');
             });
+        });
 
-            // 현재 카드 토글
+        card.addEventListener('mouseleave', () => {
+            gsap.to(card, {
+                scale: 1,
+                duration: 0.4,
+                ease: "power2.out"
+            });
+
+            card.classList.remove('active');
+        });
+
+        card.addEventListener('click', (e) => {
+            e.stopPropagation();
             card.classList.toggle('active');
+
+            if (card.classList.contains('active')) {
+                gsap.to(card, {
+                    scale: 1.15,
+                    duration: 0.4,
+                    ease: "back.out(1.4)"
+                });
+            } else {
+                gsap.to(card, {
+                    scale: 1,
+                    duration: 0.4,
+                    ease: "power2.out"
+                });
+            }
         });
     });
 
-    // 카드 외부 클릭 시 모두 닫기
     document.addEventListener('click', (e) => {
         if (!e.target.closest('.keyword_card')) {
-            cards.forEach(card => card.classList.remove('active'));
+            cards.forEach(card => {
+                card.classList.remove('active');
+                gsap.to(card, {
+                    scale: 1,
+                    duration: 0.4,
+                    ease: "power2.out"
+                });
+            });
         }
     });
 }
 
-/* =========================================================================
-   ✅ Skills: "2페이지 도착 후, 한 번 더 스크롤"에서 아이콘 떨어지기 시작
-   ========================================================================= */
+// ========== Skills 아이콘 떨어지기 트리거 ==========
 let skills_in_view = false;
 let skills_icons_started = false;
 
@@ -330,6 +343,191 @@ function setup_skills_drop_trigger() {
     }, { passive: true });
 }
 
+// ========== GSAP 트랜지션 설정 ==========
+let transition_triggered = false;
+let skills_animation_done = false;
+
+function setup_gsap_transitions() {
+    const skills_section = document.querySelector('.skills_section');
+    const works_section = document.querySelector('.works_section');
+    const light_overlay = document.querySelector('.light_overlay');
+    const falling_icons = document.querySelector('.falling_icons_container');
+    const keywords_container = document.querySelector('.keywords_container');
+    const works_title = document.querySelector('.works_section .section_title');
+    const works_content = document.querySelector('.works_content');
+    const body = document.body;
+
+    if (!skills_section || !works_section) return;
+
+    // ScrollTrigger 플러그인 등록
+    gsap.registerPlugin(ScrollTrigger);
+
+    // Skills 섹션 진입 시 화면 고정 & 카드 애니메이션
+    ScrollTrigger.create({
+        trigger: skills_section,
+        start: "top top",
+        onEnter: () => {
+            if (skills_animation_done) return;
+
+            // 화면 고정
+            body.classList.add('scroll_locked');
+
+            // 타이틀과 카드 순차 애니메이션
+            const tl = gsap.timeline({
+                onComplete: () => {
+                    skills_animation_done = true;
+                    // 애니메이션 완료 후 스크롤 해제
+                    setTimeout(() => {
+                        body.classList.remove('scroll_locked');
+                    }, 500);
+                }
+            });
+
+            // 1. 타이틀 등장
+            const skillsTitle = document.querySelector('.skills_section .section_title');
+            tl.to(skillsTitle, {
+                opacity: 1,
+                y: 0,
+                duration: 1,
+                ease: "power2.out"
+            });
+
+            // 2. 카드들 순차 등장
+            const cards = document.querySelectorAll('.keyword_card');
+            cards.forEach((card, index) => {
+                tl.to(card, {
+                    opacity: 1,
+                    y: 0,
+                    duration: 0.8,
+                    ease: "back.out(1.5)",
+                }, `-=${index === 0 ? 0 : 0.5}`);
+            });
+        }
+    });
+
+    // Skills -> Works 트랜지션
+    let canTriggerTransition = true;
+
+    window.addEventListener('wheel', (e) => {
+        if (!skills_animation_done) return;
+        if (transition_triggered) return;
+        if (!canTriggerTransition) return;
+
+        const skillsRect = skills_section.getBoundingClientRect();
+        const windowHeight = window.innerHeight;
+
+        if (e.deltaY > 0 && skillsRect.bottom < windowHeight * 1.2 && skillsRect.bottom > windowHeight * 0.3) {
+            transition_triggered = true;
+            canTriggerTransition = false;
+
+            body.classList.add('scroll_locked');
+
+            const tl = gsap.timeline({
+                onComplete: () => {
+                    body.classList.remove('scroll_locked');
+                    // 부드럽게 Works 섹션으로 이동
+                    gsap.to(window, {
+                        duration: 0.5,
+                        scrollTo: { y: works_section, offsetY: 0 },
+                        ease: "power2.inOut"
+                    });
+                }
+            });
+
+            tl.to(light_overlay, {
+                width: "200vw",
+                height: "200vw",
+                opacity: 0.85,
+                duration: 2.2,
+                ease: "power1.inOut"
+            })
+                .to([falling_icons, keywords_container], {
+                    opacity: 0,
+                    duration: 1.5,
+                    ease: "power2.inOut"
+                }, 0)
+                .to({}, { duration: 0.5 })
+                .to(light_overlay, {
+                    width: "0px",
+                    height: "0px",
+                    opacity: 0,
+                    duration: 2,
+                    ease: "power1.inOut"
+                })
+                .to(works_title, {
+                    opacity: 1,
+                    duration: 1.2,
+                    ease: "power2.out"
+                }, "-=1.5");
+        }
+    }, { passive: true });
+
+    // Works 타이틀 → 프로젝트 슬라이드 전환 (화면 고정 with pin)
+    ScrollTrigger.create({
+        trigger: works_section,
+        start: "top top",
+        end: "+=200vh",
+        pin: true, // 화면 고정!
+        scrub: 1.5,
+        onUpdate: (self) => {
+            const progress = self.progress;
+
+            // 타이틀 더 늦게 사라지도록 (0.3까지는 유지, 그 이후 사라짐)
+            const titleOpacity = progress < 0.3 ? 1 : (1 - ((progress - 0.3) / 0.7));
+            gsap.to(works_title, {
+                opacity: titleOpacity,
+                duration: 0.1
+            });
+
+            // 프로젝트 슬라이드는 조금 더 일찍 등장
+            const contentOpacity = progress < 0.2 ? 0 : ((progress - 0.2) / 0.8);
+            gsap.to(works_content, {
+                opacity: contentOpacity,
+                duration: 0.1
+            });
+        }
+    });
+
+    // 스크롤 위로 올릴 때 초기화
+    ScrollTrigger.create({
+        trigger: skills_section,
+        start: "top bottom",
+        onEnterBack: () => {
+            if (!transition_triggered) return;
+
+            transition_triggered = false;
+            canTriggerTransition = true;
+
+            gsap.to([falling_icons, keywords_container], {
+                opacity: 0.7,
+                duration: 0.6,
+                ease: "power2.out"
+            });
+
+            gsap.to(light_overlay, {
+                width: "0px",
+                height: "0px",
+                opacity: 0,
+                duration: 0.6,
+                ease: "power2.out"
+            });
+
+            gsap.to(works_title, {
+                opacity: 0,
+                duration: 0.6,
+                ease: "power2.out"
+            });
+
+            gsap.to(works_content, {
+                opacity: 0,
+                duration: 0.6,
+                ease: "power2.out"
+            });
+        }
+    });
+}
+
+// ========== Matter.js 아이콘 떨어지기 ==========
 function loadImage(src) {
     return new Promise((resolve, reject) => {
         const img = new Image();
@@ -337,6 +535,57 @@ function loadImage(src) {
         img.onerror = reject;
         img.src = src;
     });
+}
+
+// ========== 프로젝트 슬라이더 ==========
+function setup_project_slider() {
+    const slides = document.querySelectorAll('.project_slide');
+    const dots = document.querySelectorAll('.slide_dot');
+    const prevBtn = document.querySelector('.slide_nav.prev');
+    const nextBtn = document.querySelector('.slide_nav.next');
+    const currentCounter = document.querySelector('.slide_counter .current');
+    let currentIndex = 0;
+
+    function updateCounter(index) {
+        if (currentCounter) {
+            currentCounter.textContent = String(index + 1).padStart(2, '0');
+        }
+    }
+
+    function showSlide(index) {
+        slides.forEach(slide => slide.classList.remove('active'));
+        dots.forEach(dot => dot.classList.remove('active'));
+
+        slides[index].classList.add('active');
+        dots[index].classList.add('active');
+
+        currentIndex = index;
+        updateCounter(index);
+    }
+
+    function nextSlide() {
+        const next = (currentIndex + 1) % slides.length;
+        showSlide(next);
+    }
+
+    function prevSlide() {
+        const prev = (currentIndex - 1 + slides.length) % slides.length;
+        showSlide(prev);
+    }
+
+    if (nextBtn) nextBtn.addEventListener('click', nextSlide);
+    if (prevBtn) prevBtn.addEventListener('click', prevSlide);
+
+    dots.forEach((dot, index) => {
+        dot.addEventListener('click', () => showSlide(index));
+    });
+
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowLeft') prevSlide();
+        if (e.key === 'ArrowRight') nextSlide();
+    });
+
+    updateCounter(0);
 }
 
 async function createFallingIcons() {
@@ -561,13 +810,10 @@ async function createFallingIcons() {
     });
 
     const mouse = Mouse.create(render.canvas);
-    mouse.element.removeEventListener("mousewheel", mouse.mousewheel);
-    mouse.element.removeEventListener("DOMMouseScroll", mouse.mousewheel);
-
     const mouseConstraint = MouseConstraint.create(engine, {
-        mouse,
+        mouse: mouse,
         constraint: {
-            stiffness: 0.15,
+            stiffness: 0.2,
             render: { visible: false }
         }
     });
