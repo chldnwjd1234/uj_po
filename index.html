@@ -18,8 +18,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollToPlugin.min.js"></script>
 
-    <!-- Matter.js -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/matter-js/0.19.0/matter.min.js"></script>
+    <!-- Momentum Slider -->
+    <script src="https://rawgit.com/lmgonzalves/momentum-slider/master/dist/momentum-slider.min.js"></script>
 
     <!-- 메인 스크립트 -->
     <script src="./js/main.js"></script>
@@ -27,12 +27,10 @@
 
 <body>
     <div class="custom_cursor"></div>
+
     <nav>
         <a href="#hero" class="home_dot active"></a>
-        <a href="#skills">Focus</a>
         <a href="#works">Works</a>
-        <a href="#about">About</a>
-        <a href="#contact">Contact</a>
     </nav>
 
     <!-- Hero Section -->
@@ -71,233 +69,54 @@
         <div class="scroll_indicator">Scroll to begin</div>
     </section>
 
-    <!-- Skills Section -->
-    <section class="skills_section" id="skills">
-        <div class="stars_container"></div>
-        <div class="falling_icons_container"></div>
-        <div class="light_overlay"></div>
-
-        <div class="keywords_container">
-            <h2 class="section_title">Focus</h2>
-
-            <div class="keywords_grid">
-                <div class="keyword_card" data-keyword="INSIGHT">
-                    <div class="keyword_front">
-                        <h3>INSIGHT</h3>
-                    </div>
-                    <div class="keyword_detail">
-                        <h3>INSIGHT</h3>
-                        <p>사용자 행동을 깊이 이해하고<br>데이터 기반의 통찰력으로<br>문제의 본질을 파악합니다</p>
-                    </div>
-                </div>
-
-                <div class="keyword_card" data-keyword="CLARITY">
-                    <div class="keyword_front">
-                        <h3>CLARITY</h3>
-                    </div>
-                    <div class="keyword_detail">
-                        <h3>CLARITY</h3>
-                        <p>복잡한 정보를 명확하게 정리하고<br>직관적인 인터페이스로<br>사용자 경험을 단순화합니다</p>
-                    </div>
-                </div>
-
-                <div class="keyword_card" data-keyword="CRAFT">
-                    <div class="keyword_front">
-                        <h3>CRAFT</h3>
-                    </div>
-                    <div class="keyword_detail">
-                        <h3>CRAFT</h3>
-                        <p>디테일에 집중하며<br>완성도 높은 결과물을<br>만들어냅니다</p>
-                    </div>
-                </div>
-
-                <div class="keyword_card" data-keyword="GROWTH">
-                    <div class="keyword_front">
-                        <h3>GROWTH</h3>
-                    </div>
-                    <div class="keyword_detail">
-                        <h3>GROWTH</h3>
-                        <p>끊임없이 학습하고<br>새로운 기술을 탐구하며<br>지속적으로 성장합니다</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
     <!-- Works Section -->
     <section class="works_section" id="works">
         <div class="stars_container"></div>
+        <div class="light_overlay"></div>
+
         <div class="works_container">
             <h2 class="section_title">Works</h2>
 
             <div class="works_content">
-                <div class="slide_counter">
-                    <span class="current">01</span> / <span class="total">04</span>
-                </div>
-
-                <div class="projects_wrapper">
-                    <!-- Project 1 -->
-                    <div class="project_slide active" data-index="0">
-                        <div class="project_info">
-                            <div class="project_number">01</div>
-                            <p class="project_category">Web Design & Development</p>
-                            <h3 class="project_title">National Museum of Korea</h3>
-                            <p class="project_description">
-                                국립중앙박물관의 웹사이트와 랜딩 페이지를 리디자인하여
-                                사용자 경험을 개선하고 현대적인 UI/UX를 구현했습니다.
-                            </p>
-                            <div class="project_meta">
-                                <div class="project_meta_item">
-                                    <span class="project_meta_label">Role</span>
-                                    <span class="project_meta_value">UI/UX Designer</span>
-                                </div>
-                                <div class="project_meta_item">
-                                    <span class="project_meta_label">Date</span>
-                                    <span class="project_meta_value">2025.09 ~ 10</span>
-                                </div>
-                                <div class="project_meta_item">
-                                    <span class="project_meta_label">Type</span>
-                                    <span class="project_meta_value">Team Project</span>
-                                </div>
+                <div class="content_wrapper">
+                    <!-- 왼쪽: 프로젝트 정보 -->
+                    <div class="project_info_container">
+                        <div class="project_number">01</div>
+                        <div class="project_category">WEB DESIGN / DEVELOPMENT</div>
+                        <h3 class="project_title">Project One</h3>
+                        <p class="project_description">
+                            사용자 중심의 직관적인 인터페이스와 반응형 디자인을 통해 최적의 사용자 경험을 제공하는 웹 프로젝트입니다.
+                        </p>
+                        <div class="project_meta">
+                            <div class="project_meta_item">
+                                <div class="project_meta_label">ROLE</div>
+                                <div class="project_meta_value">UI/UX Design, Frontend</div>
                             </div>
-                            <div class="project_buttons">
-                                <button class="project_btn">View Site</button>
-                                <button class="project_btn">Case Study</button>
+                            <div class="project_meta_item">
+                                <div class="project_meta_label">Date</div>
+                                <div class="project_meta_value">2024</div>
                             </div>
                         </div>
-                        <div class="project_image">
-                            <div class="project_image_wrapper">
-                                <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=900"
-                                    alt="National Museum">
-                            </div>
+                        <div class="project_buttons">
+                            <a href="#" class="project_btn">VIEW PROJECT</a>
+                            <a href="#" class="project_btn">VIEW CODE</a>
                         </div>
                     </div>
 
-                    <!-- Project 2 -->
-                    <div class="project_slide" data-index="1">
-                        <div class="project_info">
-                            <div class="project_number">02</div>
-                            <p class="project_category">E-Commerce Platform</p>
-                            <h3 class="project_title">Modern Shopping Experience</h3>
-                            <p class="project_description">
-                                모던하고 직관적인 쇼핑 경험을 제공하는 이커머스 플랫폼을
-                                기획하고 디자인했습니다.
-                            </p>
-                            <div class="project_meta">
-                                <div class="project_meta_item">
-                                    <span class="project_meta_label">Role</span>
-                                    <span class="project_meta_value">Full Stack Designer</span>
-                                </div>
-                                <div class="project_meta_item">
-                                    <span class="project_meta_label">Date</span>
-                                    <span class="project_meta_value">2025.07 ~ 08</span>
-                                </div>
-                                <div class="project_meta_item">
-                                    <span class="project_meta_label">Type</span>
-                                    <span class="project_meta_value">Personal</span>
-                                </div>
-                            </div>
-                            <div class="project_buttons">
-                                <button class="project_btn">View Demo</button>
-                                <button class="project_btn">GitHub</button>
-                            </div>
-                        </div>
-                        <div class="project_image">
-                            <div class="project_image_wrapper">
-                                <img src="https://images.unsplash.com/photo-1557821552-17105176677c?w=900"
-                                    alt="E-Commerce">
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Project 3 -->
-                    <div class="project_slide" data-index="2">
-                        <div class="project_info">
-                            <div class="project_number">03</div>
-                            <p class="project_category">IoT Dashboard</p>
-                            <h3 class="project_title">Smart Home Control</h3>
-                            <p class="project_description">
-                                IoT 기기를 통합 관리할 수 있는 스마트홈 대시보드를 디자인하고
-                                개발했습니다.
-                            </p>
-                            <div class="project_meta">
-                                <div class="project_meta_item">
-                                    <span class="project_meta_label">Role</span>
-                                    <span class="project_meta_value">Product Designer</span>
-                                </div>
-                                <div class="project_meta_item">
-                                    <span class="project_meta_label">Date</span>
-                                    <span class="project_meta_value">2025.04 ~ 06</span>
-                                </div>
-                                <div class="project_meta_item">
-                                    <span class="project_meta_label">Type</span>
-                                    <span class="project_meta_value">Team Project</span>
-                                </div>
-                            </div>
-                            <div class="project_buttons">
-                                <button class="project_btn">Prototype</button>
-                                <button class="project_btn">Documentation</button>
-                            </div>
-                        </div>
-                        <div class="project_image">
-                            <div class="project_image_wrapper">
-                                <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=900"
-                                    alt="Smart Home">
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Project 4 -->
-                    <div class="project_slide" data-index="3">
-                        <div class="project_info">
-                            <div class="project_number">04</div>
-                            <p class="project_category">Mobile Application</p>
-                            <h3 class="project_title">Travel Companion</h3>
-                            <p class="project_description">
-                                여행자를 위한 올인원 모바일 애플리케이션을 디자인했습니다.
-                                여행 계획부터 현지 정보까지 한 곳에서 관리할 수 있습니다.
-                            </p>
-                            <div class="project_meta">
-                                <div class="project_meta_item">
-                                    <span class="project_meta_label">Role</span>
-                                    <span class="project_meta_value">UX/UI Designer</span>
-                                </div>
-                                <div class="project_meta_item">
-                                    <span class="project_meta_label">Date</span>
-                                    <span class="project_meta_value">2025.01 ~ 03</span>
-                                </div>
-                                <div class="project_meta_item">
-                                    <span class="project_meta_label">Type</span>
-                                    <span class="project_meta_value">Personal</span>
-                                </div>
-                            </div>
-                            <div class="project_buttons">
-                                <button class="project_btn">App Store</button>
-                                <button class="project_btn">Figma File</button>
-                            </div>
-                        </div>
-                        <div class="project_image">
-                            <div class="project_image_wrapper">
-                                <img src="https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=900"
-                                    alt="Travel App">
-                            </div>
+                    <!-- 오른쪽: 이미지 -->
+                    <div class="project_image_container">
+                        <div class="project_image"
+                            style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+                            <span class="image_placeholder">Project Image</span>
                         </div>
                     </div>
                 </div>
 
-                <div class="slide_indicators">
-                    <div class="slide_dot active" data-index="0"></div>
-                    <div class="slide_dot" data-index="1"></div>
-                    <div class="slide_dot" data-index="2"></div>
-                    <div class="slide_dot" data-index="3"></div>
-                </div>
-
-                <!-- 슬라이드 네비게이션 -->
-                <button class="slide_nav prev" aria-label="Previous">‹</button>
-                <button class="slide_nav next" aria-label="Next">›</button>
             </div>
         </div>
     </section>
+
+
 </body>
 
 </html>

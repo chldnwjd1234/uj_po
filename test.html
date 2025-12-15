@@ -1,254 +1,126 @@
-<section class="kw">
-    <!-- 중앙 포커스 영역 -->
-    <div class="kw-focus" aria-live="polite">
-        <div class="kw-title" id="kwTitle"></div>
-        <div class="kw-desc" id="kwDesc"></div>
-    </div>
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <title>GSAP 1755 Interaction Test</title>
 
-    <!-- 하단: 왼쪽부터 자리 찾아가는 슬롯 -->
-    <div class="kw-slots" id="kwSlots" aria-label="Keywords"></div>
-</section>
+  <!-- GSAP -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 
-<style>
-    .kw {
-        position: relative;
-        min-height: 100vh;
-        background: linear-gradient(180deg, #0B0D17 0%, #0F1324 102.96%);
-        overflow: hidden;
-        font-family: Inter, Pretendard, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-        color: rgba(255, 255, 255, .9);
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      background: #0B0D17;
+      font-family: sans-serif;
+      color: white;
+      overflow-x: hidden;
     }
 
-    /* 중앙 포커스 */
-    .kw-focus {
-        position: absolute;
-        left: 10vw;
-        top: 22vh;
-        width: min(560px, 80vw);
-        z-index: 3;
+    /* 테스트 섹션 */
+    .test-works {
+      position: relative;
+      height: 100vh;
+      overflow: hidden;
     }
 
-    .kw-title {
-        font-family: "DM Serif Display", serif;
-        font-size: clamp(42px, 5vw, 72px);
-        letter-spacing: .04em;
-        margin-bottom: 16px;
-        color: rgba(235, 235, 235, .95);
-        text-shadow: 0 0 26px rgba(210, 220, 255, .18);
+    /* 프로젝트 공통 */
+    .test-project {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 64px;
+      font-weight: 300;
+      letter-spacing: 2px;
+      opacity: 0;
+      white-space: nowrap;
     }
 
-    .kw-desc {
-        font-size: clamp(16px, 1.4vw, 20px);
-        line-height: 1.7;
-        letter-spacing: .01em;
-        color: rgba(235, 235, 235, .68);
-        max-width: 46ch;
+    /* 구분용 색상 */
+    .p1 { color: #91EAE4; }
+    .p2 { color: #86A8E7; }
+    .p3 { color: #7F7FD5; }
+    .p4 { color: #B993D6; }
+
+    /* 안내 텍스트 */
+    .hint {
+      position: fixed;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 14px;
+      opacity: 0.6;
+      letter-spacing: 1px;
     }
+  </style>
+</head>
+<body>
 
-    /* 하단 슬롯 */
-    .kw-slots {
-        position: absolute;
-        left: 10vw;
-        right: 10vw;
-        bottom: 9vh;
-        display: flex;
-        gap: clamp(14px, 2vw, 28px);
-        align-items: center;
-        z-index: 2;
-    }
+  <section class="test-works">
+    <div class="test-project p1">PROJECT 01</div>
+    <div class="test-project p2">PROJECT 02</div>
+    <div class="test-project p3">PROJECT 03</div>
+    <div class="test-project p4">PROJECT 04</div>
+  </section>
 
-    /* 키워드 버블(자리) */
-    .kw-chip {
-        position: relative;
-        width: clamp(74px, 8vw, 120px);
-        aspect-ratio: 1 / 1;
-        border-radius: 999px;
-        background: rgba(255, 255, 255, .10);
-        border: 1px solid rgba(255, 255, 255, .14);
-        backdrop-filter: blur(6px);
-        display: grid;
-        place-items: center;
-        cursor: pointer;
-        user-select: none;
-        transition: transform .2s ease, background .2s ease, border-color .2s ease;
-    }
+  <div class="hint">Scroll ↓ (wsss 1755 style)</div>
 
-    .kw-chip:hover {
-        transform: translateY(-4px) scale(1.02);
-        background: rgba(255, 255, 255, .13);
-        border-color: rgba(255, 255, 255, .22);
-    }
+  <script>
+    gsap.registerPlugin(ScrollTrigger);
 
-    .kw-chip__label {
-        font-size: clamp(12px, 1.2vw, 14px);
-        letter-spacing: .08em;
-        color: rgba(255, 255, 255, .72);
-    }
+    const projects = gsap.utils.toArray('.test-project');
 
-    .kw-chip.is-active {
-        background: rgba(255, 255, 255, .16);
-        border-color: rgba(255, 255, 255, .30);
-        box-shadow: 0 0 28px rgba(210, 220, 255, .18);
-    }
-
-    /* 애니메이션용: 떠다니는 “복제 카드(플로팅)” */
-    .kw-float {
-        position: fixed;
-        /* viewport 기준으로 이동 */
-        left: 0;
-        top: 0;
-        transform: translate(-9999px, -9999px);
-        z-index: 9999;
-        pointer-events: none;
-        width: clamp(74px, 8vw, 120px);
-        aspect-ratio: 1 / 1;
-        border-radius: 999px;
-        background: rgba(255, 255, 255, .16);
-        border: 1px solid rgba(255, 255, 255, .22);
-        backdrop-filter: blur(6px);
-        display: grid;
-        place-items: center;
-        box-shadow: 0 0 26px rgba(210, 220, 255, .12);
-    }
-
-    .kw-float span {
-        font-size: clamp(12px, 1.2vw, 14px);
-        letter-spacing: .08em;
-        color: rgba(255, 255, 255, .85);
-    }
-</style>
-
-<!-- GSAP 필요 -->
-<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
-
-<script>
-    // ====== 데이터 (원하는 키워드/설명으로 교체) ======
-    const KEYWORDS = [
-        { id: 'insight', title: 'INSIGHT', desc: 'Understanding the problem before solving it.' },
-        { id: 'clarity', title: 'CLARITY', desc: 'Turning complexity into clear structures.' },
-        { id: 'craft', title: 'CRAFT', desc: 'Designing with intention and detail.' },
-        { id: 'growth', title: 'GROWTH', desc: 'Continuously learning through each project.' },
-    ];
-
-    const $slots = document.getElementById('kwSlots');
-    const $title = document.getElementById('kwTitle');
-    const $desc = document.getElementById('kwDesc');
-
-    // 슬롯(자리) 생성
-    KEYWORDS.forEach((k) => {
-        const chip = document.createElement('button');
-        chip.type = 'button';
-        chip.className = 'kw-chip';
-        chip.dataset.id = k.id;
-        chip.innerHTML = `<span class="kw-chip__label">${k.title}</span>`;
-        chip.addEventListener('click', () => focusKeyword(k.id));
-        $slots.appendChild(chip);
+    // 초기 상태
+    projects.forEach((el, i) => {
+      gsap.set(el, {
+        opacity: i === 0 ? 1 : 0,
+        y: i === 0 ? 0 : 120
+      });
     });
 
-    const chips = Array.from(document.querySelectorAll('.kw-chip'));
+    ScrollTrigger.create({
+      trigger: '.test-works',
+      start: 'top top',
+      end: '+=400%',     // 프로젝트 4개 → 4칸
+      pin: true,
+      scrub: 1,
 
-    // 중앙 포커스 업데이트
-    function setFocusText(k) {
-        $title.textContent = k.title;
-        $desc.textContent = k.desc;
-        gsap.fromTo([$title, $desc],
-            { autoAlpha: 0, y: 10 },
-            { autoAlpha: 1, y: 0, duration: .45, ease: 'power2.out', stagger: .06 }
+      onUpdate(self) {
+        const index = Math.min(
+          projects.length - 1,
+          Math.floor(self.progress * projects.length)
         );
-    }
 
-    // 중앙 포커스 위치(뷰포트 기준 좌표)
-    function getCenterFocusPoint() {
-        const r = document.querySelector('.kw-focus').getBoundingClientRect();
-        // 타이틀 영역 중심쯤으로 맞춤
-        return { x: r.left + 60, y: r.top + 80 };
-    }
-
-    // 플로팅 버블(중앙→자리 이동 / 자리→중앙 이동)
-    const float = document.createElement('div');
-    float.className = 'kw-float';
-    float.innerHTML = `<span></span>`;
-    document.body.appendChild(float);
-    const floatLabel = float.querySelector('span');
-
-    // 초기: 순차 등장 → 왼쪽부터 자리로 "찾아가기"
-    async function introSequence() {
-        // 첫 화면 텍스트는 첫 키워드
-        setFocusText(KEYWORDS[0]);
-
-        for (let i = 0; i < KEYWORDS.length; i++) {
-            const k = KEYWORDS[i];
-            const chip = chips.find(c => c.dataset.id === k.id);
-
-            // 1) 중앙에서 키워드 소개
-            setFocusText(k);
-
-            // 2) 중앙에 떠오르는 버블 생성(플로팅)
-            floatLabel.textContent = k.title;
-            const from = getCenterFocusPoint();
-            const to = chip.getBoundingClientRect();
-
-            // 플로팅 시작 위치
-            gsap.set(float, { x: from.x, y: from.y, scale: 1, autoAlpha: 0 });
-            // chip은 "아직 들어오지 않은 상태"처럼 살짝 숨김
-            gsap.set(chip, { autoAlpha: 0, scale: .9 });
-
-            // 3) 중앙에서 나타난 뒤 → 자기 슬롯로 이동(왼쪽부터 자리 찾기)
-            await gsap.timeline()
-                .to(float, { autoAlpha: 1, duration: .18, ease: 'power1.out' })
-                .to(float, { scale: 1.08, duration: .22, ease: 'power2.out' }, 0)
-                .to(float, {
-                    x: to.left + to.width / 2,
-                    y: to.top + to.height / 2,
-                    duration: .75,
-                    ease: 'power3.inOut'
-                })
-                .to(float, { scale: .98, duration: .2, ease: 'power2.out' }, '<')
-                .to(chip, { autoAlpha: 1, scale: 1, duration: .25, ease: 'power2.out' }, '-=0.18')
-                .to(float, { autoAlpha: 0, duration: .12 }, '-=0.10')
-                .then();
-
-            // 살짝 텀
-            await gsap.to({}, { duration: 0.25 }).then();
-        }
-
-        // 끝나면 첫 키워드 active로
-        setActiveChip(KEYWORDS[0].id);
-    }
-
-    function setActiveChip(id) {
-        chips.forEach(c => c.classList.toggle('is-active', c.dataset.id === id));
-    }
-
-    // 클릭 시: 선택한 키워드가 "자리에서 중앙으로" 나오고,
-    // 중앙 내용을 바꾸고, active 표시 변경
-    function focusKeyword(id) {
-        const k = KEYWORDS.find(x => x.id === id);
-        const chip = chips.find(c => c.dataset.id === id);
-        if (!k || !chip) return;
-
-        setActiveChip(id);
-
-        // 자리 → 중앙으로 이동하는 플로팅 버블 애니메이션
-        floatLabel.textContent = k.title;
-
-        const from = chip.getBoundingClientRect();
-        const to = getCenterFocusPoint();
-
-        gsap.set(float, { x: from.left + from.width / 2, y: from.top + from.height / 2, scale: 1, autoAlpha: 0 });
-        gsap.timeline()
-            .to(float, { autoAlpha: 1, duration: .12 })
-            .to(float, { scale: 1.12, duration: .25, ease: 'power2.out' }, 0)
-            .to(float, { x: to.x, y: to.y, duration: .7, ease: 'power3.inOut' })
-            .to(float, { autoAlpha: 0, duration: .12 }, '-=0.05');
-
-        // 텍스트는 살짝 딜레이 후 갱신(이동과 싱크)
-        gsap.delayedCall(0.18, () => setFocusText(k));
-    }
-
-    // 시작
-    window.addEventListener('load', () => {
-        // 스크롤 섹션 진입 트리거로 쓰고 싶으면 여기 말고 IntersectionObserver로 introSequence 호출하면 됨
-        introSequence();
+        projects.forEach((el, i) => {
+          if (i === index) {
+            gsap.to(el, {
+              opacity: 1,
+              y: 0,
+              duration: 0.6,
+              ease: 'power3.out'
+            });
+          } else if (i < index) {
+            gsap.to(el, {
+              opacity: 0,
+              y: -120,
+              duration: 0.6,
+              ease: 'power3.inOut'
+            });
+          } else {
+            gsap.to(el, {
+              opacity: 0,
+              y: 120,
+              duration: 0.6,
+              ease: 'power3.inOut'
+            });
+          }
+        });
+      }
     });
-</script>
+  </script>
+
+</body>
+</html>
