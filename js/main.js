@@ -78,7 +78,7 @@ function setup_custom_cursor() {
         }
     });
 
-    document.querySelectorAll('a, button').forEach(el => {
+    document.querySelectorAll('a, button, .contact_link').forEach(el => {
         el.addEventListener('mouseenter', () => cursor.classList.add('hover'));
         el.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
     });
@@ -678,7 +678,6 @@ function setupKeywordCards() {
 // ========== Skills 아이콘 떨어지기 ==========
 let skills_in_view = false;
 let skills_icons_started = false;
-let skills_icons_settled = false; // 모든 아이콘이 정착했는지
 
 function setup_skills_drop_trigger() {
     const aboutmeSection = document.querySelector('#aboutme');
@@ -1022,9 +1021,8 @@ function createFallingIcons() {
             const aboutmeTop = aboutmeSection.offsetTop;
             const aboutmeBottom = aboutmeTop + aboutmeSection.offsetHeight;
 
-            // ✅ 수정: About Me 섹션을 벗어나면 캔버스 즉시 숨기기
-            // About Me 섹션이 화면 아래로 벗어났을 때 (스크롤을 올렸을 때) - 더 빨리 반응
-            const isAboveAboutMe = currentScroll < aboutmeTop - window.innerHeight * 0.2;
+            // ✅ 스크롤 올릴 때 즉시 사라지도록 범위 최소화
+            const isAboveAboutMe = currentScroll < aboutmeTop;
 
             // Contact 섹션을 지나쳤을 때 (스크롤을 내렸을 때)
             const contactTop = contactSection.offsetTop;

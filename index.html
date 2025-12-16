@@ -12,6 +12,7 @@
         rel="stylesheet">
     <link rel="stylesheet" href="./css/reset.css">
     <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
@@ -351,7 +352,7 @@
         </div>
     </section>
 
-    <!-- Contact Section -->
+    <!-- Contact Section - 수정된 부분 -->
     <section class="contact_section" id="contact">
         <div class="stars_container"></div>
         <div class="city_background"></div>
@@ -361,13 +362,25 @@
                 <h2 class="contact_main_title">See you in the light.</h2>
                 <p class="contact_sub_title">Thank You</p>
 
+                <!-- ✅ 수정된 contact_info - Font Awesome 사용 -->
                 <div class="contact_info">
-                    <div class="contact_item email">dnwjd3021@gmail.com</div>
-                    <div class="contact_item github">GitHub: github.com/woojung</div>
+                    <div class="contact_links">
+                        <a href="mailto:dnwjd3021@email.com" class="contact_link">
+                            <i class="fa-solid fa-envelope"></i>
+                            <span>Email</span>
+                        </a>
+                        <a href="https://github.com/chldnwjd1234" target="_blank" class="contact_link">
+                            <i class="fa-brands fa-github"></i>
+                            <span>GitHub</span>
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
+
+    <!-- ✅ HTML <head>에 Font Awesome CDN 추가 필요 -->
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"> -->
 </body>
 
 </html>

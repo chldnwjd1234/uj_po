@@ -745,29 +745,6 @@ nav .home_dot::after {
     }
 }
 
-
-/* 반응형 */
-@media (max-width: 1200px) {
-    .keywords_grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 50px;
-    }
-}
-
-@media (max-width: 768px) {
-    .keywords_grid {
-        grid-template-columns: 1fr;
-        gap: 50px;
-        padding: 0 20px;
-    }
-
-    .subsection_title {
-        opacity: 1;
-        /* 초기 보이게 설정 */
-        font-size: 60px;
-    }
-}
-
 /* ========== About Me Section ========== */
 .aboutme_section {
     position: relative;
@@ -898,7 +875,8 @@ nav .home_dot::after {
     height: 100vh;
     z-index: 5;
     opacity: 0.7;
-    pointer-events: auto;
+    pointer-events: none;
+    /* ✅ none으로 변경 - 호버 방해 방지 */
     display: none;
     /* 초기에는 숨김 */
 }
@@ -916,6 +894,7 @@ nav .home_dot::after {
     height: 100%;
     filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.6)) drop-shadow(0 0 15px rgba(255, 255, 255, 0.4)) drop-shadow(0 0 25px rgba(255, 255, 255, 0.2));
     pointer-events: auto;
+    /* 캔버스만 클릭 가능 */
     cursor: pointer;
 }
 
@@ -1007,7 +986,8 @@ nav .home_dot::after {
 .contact_content {
     position: relative;
     opacity: 0;
-    z-index: 2;
+    z-index: 10;
+    /* ✅ 2에서 10으로 증가 - 아이콘 위에 표시 */
     transition: opacity 1s ease 0.3s;
     /* 0.3초 지연 후 fade in */
 }
@@ -1069,38 +1049,37 @@ nav .home_dot::after {
     gap: 20px;
 }
 
-.contact_item {
+/* Contact 링크 스타일 */
+.contact_links {
+    display: flex;
+    gap: 40px;
+    margin-top: 20px;
+}
+
+.contact_link {
     display: flex;
     align-items: center;
-    gap: 15px;
+    gap: 12px;
     font-family: 'Montserrat', sans-serif;
     font-size: 20px;
-    font-weight: 300;
+    font-weight: 400;
     color: rgba(255, 255, 255, 0.85);
     letter-spacing: 0.5px;
-    transition: color 0.3s;
+    text-decoration: none;
+    padding: 16px 26px;
+    border-radius: 30px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.5),
+        0 0 20px rgba(255, 255, 255, 0.3);
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.1),
+        0 0 30px rgba(255, 255, 255, 0.05);
 }
 
-.contact_item:hover {
-    color: rgba(255, 255, 255, 1);
-}
-
-.contact_item::before {
-    content: '';
-    width: 24px;
-    height: 24px;
-    flex-shrink: 0;
-}
-
-.contact_item.email::before {
-    content: '✉';
+.contact_link i {
     font-size: 24px;
-}
-
-
-.contact_item.github::before {
-    content: '💻';
-    font-size: 24px;
+    filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.4));
 }
 
 /* Contact 배경 - Hero와 동일하지만 건물만 밝게 */
