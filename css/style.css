@@ -26,7 +26,7 @@ body.scroll_locked {
     transform: translate(-50%, -50%);
     transition: width 0.5s, height 0.5s, box-shadow 0.5s;
     box-shadow: 0 0 15px rgba(255, 255, 255, 0.5), 0 0 30px rgba(255, 255, 255, 0.3);
-    z-index: 10000;
+    z-index: 1000;
 }
 
 .custom_cursor.small {
@@ -293,7 +293,7 @@ nav .home_dot::after {
     transition: all 1s ease;
 }
 
-/* 빛 오버레이 - 동그란 형태로 확산 (밝기 더 낮춤) */
+/* 빛 오버레이 - 동그란 형태로 확산 */
 .light_overlay {
     position: absolute;
     top: 50%;
@@ -314,6 +314,7 @@ nav .home_dot::after {
     opacity: 0;
     pointer-events: none;
     filter: blur(40px);
+    will-change: opacity, width, height;
 }
 
 .works_content {
@@ -324,6 +325,11 @@ nav .home_dot::after {
     align-items: center;
     justify-content: center;
     opacity: 0;
+    transition: opacity 0.8s ease;
+}
+
+.works_content:active {
+    cursor: default;
 }
 
 /* 프로젝트 슬라이드 컨테이너 */
@@ -339,7 +345,7 @@ nav .home_dot::after {
     margin: 0 auto;
 }
 
-/* 프로젝트 슬라이드 */
+/* ✅ 수정: 프로젝트 슬라이드 - 각 버튼이 독립적으로 작동하도록 */
 .project_slide {
     position: absolute;
     width: 100%;
@@ -351,13 +357,20 @@ nav .home_dot::after {
     padding: 0;
     opacity: 0;
     pointer-events: none;
-    transition: none;
-    will-change: transform, opacity;
+    z-index: 1;
 }
 
 .project_slide.active {
     opacity: 1;
     pointer-events: auto;
+    z-index: 10;
+}
+
+/* 버튼은 항상 클릭 가능 */
+.project_btn {
+    cursor: pointer !important;
+    z-index: 100;
+    position: relative;
 }
 
 /* 왼쪽: 프로젝트 정보 */
@@ -444,26 +457,39 @@ nav .home_dot::after {
 .project_buttons {
     display: flex;
     gap: 15px;
+    position: relative;
 }
 
 .project_btn {
-    padding: 15px 35px;
-    background: transparent;
-    border: 1px solid rgba(255, 255, 255, 0.3);
+    padding: 16px 40px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 2px solid rgba(255, 255, 255, 0.4);
     border-radius: 50px;
-    color: rgba(255, 255, 255, 0.9);
+    color: rgba(255, 255, 255, 1);
     font-family: 'Montserrat', sans-serif;
     font-size: 16px;
-    font-weight: 400;
+    font-weight: 500;
     letter-spacing: 0.5px;
     text-transform: capitalize;
-    cursor: pointer;
+    cursor: pointer !important;
     transition: all 0.3s ease;
+    position: relative;
+    text-decoration: none;
+    display: inline-block;
+    user-select: none;
 }
 
 .project_btn:hover {
-    border-color: rgba(255, 255, 255, 0.6);
-    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.9);
+    background: rgba(255, 255, 255, 0.2);
+    color: rgba(255, 255, 255, 1);
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(255, 255, 255, 0.3);
+}
+
+.project_btn:active {
+    transform: translateY(-1px);
+    box-shadow: 0 3px 10px rgba(255, 255, 255, 0.2);
 }
 
 /* 오른쪽: 프로젝트 이미지 */
@@ -502,6 +528,7 @@ nav .home_dot::after {
     left: 15%;
     display: flex;
     gap: 15px;
+    z-index: 20;
 }
 
 .slide_dot {
@@ -511,16 +538,29 @@ nav .home_dot::after {
     background: rgba(255, 255, 255, 0.3);
     cursor: pointer;
     position: relative;
-    transition: all 0.4s ease;
+    transition: all 0.3s ease;
+    z-index: 100;
+}
+
+/* 클릭 영역만 확대 (보이지 않음) */
+.slide_dot::after {
+    content: '';
+    position: absolute;
+    top: -10px;
+    left: -10px;
+    right: -10px;
+    bottom: -10px;
+    border-radius: 50%;
 }
 
 .slide_dot:hover {
-    background: rgba(255, 255, 255, 0.5);
-    transform: scale(1.2);
+    background: rgba(255, 255, 255, 0.6);
+    transform: scale(1.3);
 }
 
 .slide_dot.active {
     background: rgba(255, 255, 255, 0.9);
+    transform: scale(1.2);
 }
 
 /* 슬라이드 카운터 - 이미지 위 오른쪽 */
@@ -534,6 +574,7 @@ nav .home_dot::after {
     color: rgba(255, 255, 255, 0.5);
     letter-spacing: 2px;
     display: block;
+    z-index: 10;
 }
 
 .slide_counter .current {
@@ -662,7 +703,6 @@ nav .home_dot::after {
 .keyword_card.active {
     background: radial-gradient(circle, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.12));
     box-shadow: 0 0 50px rgba(255, 255, 255, 0.5), 0 0 100px rgba(255, 255, 255, 0.3);
-    z-index: 50;
 }
 
 .keyword_front {
@@ -866,38 +906,6 @@ nav .home_dot::after {
     object-fit: cover;
 }
 
-/* Falling Icons - fixed로 설정하여 About Me ~ Contact까지 보이게 */
-.falling_icons_container {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100vh;
-    z-index: 5;
-    opacity: 0.7;
-    pointer-events: none;
-    /* ✅ none으로 변경 - 호버 방해 방지 */
-    display: none;
-    /* 초기에는 숨김 */
-}
-
-.falling_icons_container.active {
-    display: block;
-    /* 아이콘 떨어질 때 표시 */
-}
-
-.falling_icons_container canvas {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.6)) drop-shadow(0 0 15px rgba(255, 255, 255, 0.4)) drop-shadow(0 0 25px rgba(255, 255, 255, 0.2));
-    pointer-events: auto;
-    /* 캔버스만 클릭 가능 */
-    cursor: pointer;
-}
-
 /* 반응형 */
 @media (max-width: 1200px) {
     .aboutme_content {
@@ -956,18 +964,17 @@ nav .home_dot::after {
     position: relative;
     min-height: 100vh;
     width: 100%;
-    /* ✅ 배경색을 위 섹션과 동일하게 변경 */
     background: linear-gradient(180deg, #0B0D17 0%, #0F1324 50%, #0B0D17 100%);
     background-attachment: fixed;
     overflow: hidden;
-    opacity: 0.3;
-    /* 초기 상태를 어둡게 */
-    transition: opacity 1s ease;
+    opacity: 0;
+    /* ✅ 완전히 투명하게 시작 */
+    transition: opacity 1.5s ease;
 }
 
 .contact_section.visible {
     opacity: 1;
-    /* 스크롤 시 밝아짐 */
+    /* ✅ 보일 때 천천히 나타남 */
 }
 
 .contact_container {
@@ -986,10 +993,7 @@ nav .home_dot::after {
 .contact_content {
     position: relative;
     opacity: 0;
-    z-index: 10;
-    /* ✅ 2에서 10으로 증가 - 아이콘 위에 표시 */
     transition: opacity 1s ease 0.3s;
-    /* 0.3초 지연 후 fade in */
 }
 
 .contact_section.visible .contact_content {
@@ -1001,32 +1005,48 @@ nav .home_dot::after {
     font-size: 140px;
     font-weight: 400;
     color: rgba(255, 255, 255, 0.95);
+    /* ✅ 0.9 → 0.95 더 밝게 */
     letter-spacing: 6px;
     line-height: 1.1;
     margin-bottom: 40px;
+    opacity: 0;
+    transform: translateY(30px);
     text-shadow:
-        0 0 10px rgba(255, 255, 255, 0.8),
-        0 0 20px rgba(255, 255, 255, 0.6),
-        0 0 30px rgba(255, 255, 255, 0.4),
-        0 0 40px rgba(255, 255, 255, 0.2);
-    animation: textGlow 3s ease-in-out infinite alternate;
+        0 0 10px rgba(255, 255, 255, 0.5),
+        /* ✅ 밝기 증가 */
+        0 0 20px rgba(255, 255, 255, 0.4),
+        0 0 30px rgba(255, 255, 255, 0.3);
+    transition: opacity 1.5s ease 0.5s, transform 1.5s ease 0.5s;
+}
+
+/* ✅ Contact 섹션이 보일 때 타이틀 밝아지기 */
+.contact_section.visible .contact_main_title {
+    opacity: 1;
+    transform: translateY(0);
+    animation: textGlow 2.5s ease-in-out infinite;
+    /* ✅ 4초 → 2.5초 더 빠르게 */
 }
 
 @keyframes textGlow {
-    0% {
+
+    0%,
+    100% {
         text-shadow:
-            0 0 10px rgba(255, 255, 255, 0.8),
-            0 0 20px rgba(255, 255, 255, 0.6),
+            0 0 10px rgba(255, 255, 255, 0.6),
+            /* ✅ 기본도 더 밝게 */
+            0 0 20px rgba(255, 255, 255, 0.5),
             0 0 30px rgba(255, 255, 255, 0.4),
             0 0 40px rgba(255, 255, 255, 0.2);
     }
 
-    100% {
+    50% {
         text-shadow:
-            0 0 15px rgba(255, 255, 255, 1),
-            0 0 30px rgba(255, 255, 255, 0.8),
-            0 0 45px rgba(255, 255, 255, 0.6),
-            0 0 60px rgba(255, 255, 255, 0.4);
+            0 0 20px rgba(255, 255, 255, 1),
+            /* ✅ 최대 밝기 대폭 증가! */
+            0 0 35px rgba(255, 255, 255, 0.8),
+            0 0 50px rgba(255, 255, 255, 0.6),
+            0 0 70px rgba(255, 255, 255, 0.4),
+            0 0 90px rgba(255, 255, 255, 0.2);
     }
 }
 
@@ -1035,12 +1055,23 @@ nav .home_dot::after {
     font-size: 60px;
     font-weight: 400;
     color: rgba(255, 255, 255, 0.9);
+    /* ✅ 0.85 → 0.9 더 밝게 */
     letter-spacing: 4px;
     margin-bottom: 80px;
+    opacity: 0;
+    transform: translateY(20px);
     text-shadow:
-        0 0 8px rgba(255, 255, 255, 0.6),
-        0 0 15px rgba(255, 255, 255, 0.4),
-        0 0 20px rgba(255, 255, 255, 0.2);
+        0 0 8px rgba(255, 255, 255, 0.4),
+        /* ✅ 밝기 증가 */
+        0 0 15px rgba(255, 255, 255, 0.3),
+        0 0 22px rgba(255, 255, 255, 0.2);
+    transition: opacity 1.5s ease 0.8s, transform 1.5s ease 0.8s;
+}
+
+/* ✅ Contact 섹션이 보일 때 서브타이틀도 밝아지기 */
+.contact_section.visible .contact_sub_title {
+    opacity: 1;
+    transform: translateY(0);
 }
 
 .contact_info {
@@ -1054,6 +1085,16 @@ nav .home_dot::after {
     display: flex;
     gap: 40px;
     margin-top: 20px;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 1.5s ease 1.1s, transform 1.5s ease 1.1s;
+    /* ✅ 1.1초 지연 */
+}
+
+/* ✅ Contact 섹션이 보일 때 링크도 밝아지기 */
+.contact_section.visible .contact_links {
+    opacity: 1;
+    transform: translateY(0);
 }
 
 .contact_link {
@@ -1063,7 +1104,8 @@ nav .home_dot::after {
     font-family: 'Montserrat', sans-serif;
     font-size: 20px;
     font-weight: 400;
-    color: rgba(255, 255, 255, 0.85);
+    color: rgba(255, 255, 255, 0.8);
+    /* ✅ 0.85 → 0.8 */
     letter-spacing: 0.5px;
     text-decoration: none;
     padding: 16px 26px;
@@ -1071,15 +1113,29 @@ nav .home_dot::after {
     border: 1px solid rgba(255, 255, 255, 0.3);
     background: rgba(255, 255, 255, 0.05);
     backdrop-filter: blur(10px);
-    text-shadow: 0 0 10px rgba(255, 255, 255, 0.5),
-        0 0 20px rgba(255, 255, 255, 0.3);
-    box-shadow: 0 0 15px rgba(255, 255, 255, 0.1),
-        0 0 30px rgba(255, 255, 255, 0.05);
+    text-shadow: 0 0 8px rgba(255, 255, 255, 0.3),
+        /* ✅ 밝기 감소 */
+        0 0 15px rgba(255, 255, 255, 0.2);
+    box-shadow: 0 0 12px rgba(255, 255, 255, 0.08),
+        0 0 25px rgba(255, 255, 255, 0.04);
+    transition: all 0.3s ease;
+}
+
+.contact_link:hover {
+    border-color: rgba(255, 255, 255, 0.5);
+    /* ✅ 0.6 → 0.5 */
+    background: rgba(255, 255, 255, 0.08);
+    /* ✅ 0.1 → 0.08 */
+    transform: translateY(-3px);
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.15),
+        /* ✅ 밝기 감소 */
+        0 0 40px rgba(255, 255, 255, 0.08);
 }
 
 .contact_link i {
     font-size: 24px;
-    filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.4));
+    filter: drop-shadow(0 0 6px rgba(255, 255, 255, 0.3));
+    /* ✅ 밝기 감소 */
 }
 
 /* Contact 배경 - Hero와 동일하지만 건물만 밝게 */
@@ -1094,11 +1150,8 @@ nav .home_dot::after {
     background-size: cover;
     background-position: center bottom;
     background-repeat: no-repeat;
-    /* ✅ 초기 opacity 0 */
     opacity: 0;
-    /* ✅ 건물만 살짝 밝게 */
     filter: brightness(1.5) contrast(1.3);
-    /* ✅ 부드러운 전환 추가 */
     transition: opacity 1s ease;
 }
 

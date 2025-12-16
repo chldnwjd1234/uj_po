@@ -1,0 +1,942 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="우체국 사이트 정의입니다">
+    <meta name="keywords" content="HTML, CSS, JavaScript">
+    <meta name="author" content="UJUNG">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>인터넷우체국</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/main_style.css">
+    <link rel="stylesheet" href="css/media.css">
+    <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
+    <script src="https://kit.fontawesome.com/538f2dd5fa.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="js/main.js" defer></script>
+</head>
+
+<body>
+    <div class="wrap">
+        <header class="">
+            <div class="inner">
+                <h1><a href="#">인터넷우체국</a></h1>
+                <nav>
+                    <ul class="gnb">
+                        <li><a href="#">우편</a>
+                            <ul class="sub">
+                                <li><a href="#">e-그린우편(舊 전자우편)</a></li>
+                                <li><a href="#">생활정보홍보우편</a></li>
+                                <li><a href="#">증명서비스</a></li>
+                                <li><a href="#">간편사전접수</a></li>
+                                <li><a href="#">부가서비스</a></li>
+                                <li><a href="#">나의 이용정보</a></li>
+                            </ul><!-- //.sub -->
+                        </li>
+                        <li><a href="#">우체국쇼핑</a>
+                            <ul class="sub">
+                                <li><a href="#">특산물</a></li>
+                                <li><a href="#">꽃배달</a></li>
+                                <li><a href="#">전통시장</a></li>
+                                <li><a href="#">해외배송</a></li>
+                                <li><a href="#">우체국B2B</a></li>
+                            </ul><!-- //.sub -->
+                        </li>
+                        <li><a href="#">국내소포</a>
+                            <ul class="sub">
+                                <li><a href="#">방문접수소포(픽업)</a></li>
+                                <li><a href="#">창구소포</a></li>
+                                <li><a href="#">착불배달 우편물 요금 결제 조회</a></li>
+                                <li><a href="#">이용안내</a></li>
+                            </ul><!-- //.sub -->
+                        </li>
+                        <li><a href="#">EMS·국제우편</a>
+                            <ul class="sub">
+                                <li><a href="#">EMS·국제우편 예약</a></li>
+                                <li><a href="#">국가별 요금안내</a></li>
+                                <li><a href="#">행방조회/조사청구</a></li>
+                                <li><a href="#">통관절차대행수수료 납부/조회</a></li>
+                                <li><a href="#">서비스안내</a></li>
+                                <li><a href="#">국가별 발송조건 안내</a></li>
+                                <li><a href="#">EMS/K-packet계약제도</a></li>
+                                <li><a href="#">유용한 국제특송정보</a></li>
+                            </ul><!-- //.sub -->
+                        </li>
+                        <li><a href="#">모바일우편함</a>
+                            <ul class="sub">
+                                <li><a href="#">서비스안내</a></li>
+                            </ul><!-- //.sub -->
+                        </li>
+                    </ul>
+                </nav>
+                <div class="right">
+                    <a href="#" class="af">계약고객전용</a>
+                    <a href="#" class="af">검색</a>
+                    <ul>
+                        <li></li>
+                        <li></li>
+                        <li></li>
+                    </ul>
+                </div>
+            </div><!-- //.inner -->
+            <div class="ham_menu">
+                <div class="container">
+                    <h2>전체메뉴</h2>
+                    <div class="all_con">
+                        <ul class="list">
+                            <li class="">
+                                <button type="button">우편</button>
+                                <ul class="sub_list">
+                                    <li><a href="#">e-그린우편(舊 전자우편)</a></li>
+                                    <li><a href="#">생활정보홍보우편</a></li>
+                                    <li><a href="#">증명서비스</a></li>
+                                    <li><a href="#">간편사전접수</a></li>
+                                    <li><a href="#">부가서비스</a></li>
+                                    <li><a href="#">나의 이용정보</a></li>
+                                </ul><!-- //.sub_list -->
+                            </li>
+                            <li>
+                                <button type="button">우체국쇼핑</button>
+                                <ul class="sub_list">
+                                    <li><a href="#">특산물</a></li>
+                                    <li><a href="#">꽃배달</a></li>
+                                    <li><a href="#">전통시장</a></li>
+                                    <li><a href="#">해외배송</a></li>
+                                    <li><a href="#">우체국B2B</a></li>
+                                </ul><!-- //.sub_list -->
+                            </li>
+                            <li>
+                                <button type="button">국내소포</button>
+                                <ul class="sub_list">
+                                    <li><a href="#">방문접수소포(픽업)</a></li>
+                                    <li><a href="#">창구소포</a></li>
+                                    <li><a href="#">착불배달 우편물 요금</a></li>
+                                    <li><a href="#">결제/조회</a></li>
+                                    <li><a href="#">이용안내</a></li>
+                                </ul><!-- //.sub_list -->
+                            </li>
+                            <li>
+                                <button type="button">EMS·국제우편</button>
+                                <ul class="sub_list">
+                                    <li><a href="#">EMS·국제우편 예약</a></li>
+                                    <li><a href="#">국가별 요금안내</a></li>
+                                    <li><a href="#">행방조회/조사청구</a></li>
+                                    <li><a href="#">통관절차대행수수료 납부/조회</a></li>
+                                    <li><a href="#">서비스안내</a></li>
+                                </ul><!-- //.sub_list -->
+                            </li>
+                        </ul><!-- //.list -->
+                        <ul class="list">
+                            <li>
+                                <button type="button">우표ㆍ엽서ㆍ카드</button>
+                                <ul class="sub_list">
+                                    <li><a href="#">기념우표 사전예약판매</a></li>
+                                    <li><a href="#">우표류</a></li>
+                                    <li><a href="#">엽서류</a></li>
+                                    <li><a href="#">축하카드류</a></li>
+                                    <li><a href="#">한국우표포털</a></li>
+                                    <li><a href="#">나의 이용정보</a></li>
+                                </ul><!-- //.sub_list -->
+                            </li>
+                            <li>
+                                <button type="button">골드바ㆍ우체국알뜰폰</button>
+                                <ul class="sub_list">
+                                    <li><a href="#">골드바</a></li>
+                                    <li><a href="#">우체국알뜰폰</a></li>
+                                </ul><!-- //.sub_list -->
+                                
+                            </li>
+                            <li>
+                                <button type="button">모바일우편함</button>
+                                <ul class="sub_list">
+                                    <li><a href="#">서비스안내</a></li>
+                                </ul><!-- //.sub_list -->
+                            </li>
+                            <li>
+                                <button type="button">고객센터</button>
+                                <ul class="sub_list">
+                                    <li><a href="#">공지사항</a></li>
+                                    <li><a href="#">이벤트</a></li>
+                                    <li><a href="#">자주하는 질문</a></li>
+                                    <li><a href="#">이용안내</a></li>
+                                    <li><a href="#">고객불편신고</a></li>
+
+                                </ul><!-- //.sub_list -->
+                            </li>
+                        </ul>
+                    </div><!-- //.all_con -->
+                </div><!-- //.container -->
+            </div><!-- //.ham_menu -->
+        </header>
+        <main>
+            <div class="mian_visual">
+                <div class="inner slide">
+                    <div class="slide_visual swiper">
+                        <ul class="swiper-wrapper">
+                            <li class="swiper-slide slide1">
+                                <img src="img/main3.png" alt="">
+                                <div class="txt_area">
+                                    <div class="sub_txt">KOREA POST</div>
+                                    <div class="tit">
+                                        <p>전국을 잇는</p>
+                                        <p>우체국 물류 네트워크</p>
+                                    </div><!-- //.tit -->
+                                    <div class="txt">
+                                        <p>거대한 물류 허브에서</p>
+                                        <p>출발하는 믿을 수 있는 배송</p>
+                                    </div>
+                                    <a href="#" class="more"><span>자세히 보기 </span><i
+                                            class="fa-solid fa-arrow-right"></i></a>
+                                </div>
+                            </li>
+                            <li class="swiper-slide slide2">
+                                <img src="img/main.png" alt="">
+                                <div class="txt_area">
+                                    <div class="sub_txt">KOREA POST</div>
+                                    <div class="tit">
+                                        <p>든든한 금융</p>
+                                        <p>언제나 가까운 우체국</p>
+                                    </div><!-- //.tit -->
+                                    <div class="txt">
+                                        <p>예금부터 보험까지</p>
+                                        <p>나의 생활 속 금융 파트너</p>
+                                    </div>
+                                    <a href="#" class="more"><span>자세히 보기 </span><i
+                                            class="fa-solid fa-arrow-right"></i></a>
+                                </div>
+                            </li>
+                            <li class="swiper-slide slide3">
+                                 <img src="img/main2.png" alt="">
+                                <div class="txt_area">
+                                    <div class="sub_txt">KOREA POST</div>
+                                    <div class="tit">
+                                        <p>즐거운 혜택</p>
+                                        <p>특별한 쇼핑은 우체국에서</p>
+                                    </div><!-- //.tit -->
+                                    <div class="txt">
+                                        <p>제철 농산물</p>
+                                        <p>카드 할인, 다양한 기획전까지</p>
+                                    </div>
+                                    <a href="#" class="more"><span>자세히 보기 </span><i
+                                            class="fa-solid fa-arrow-right"></i></a>
+                                </div>
+                            </li>
+                            <li class="swiper-slide slide4">
+                                <img src="img/main4.png" alt="">
+                                <div class="txt_area">
+                                    <div class="sub_txt">KOREA POST</div>
+                                    <div class="tit">
+                                        <p>일상 가까이</p>
+                                        <p> 더 빨리 도착하는 우체국</p>
+                                    </div><!-- //.tit -->
+                                    <div class="txt">
+                                        <p>전국 어디든 안전하고</p>
+                                        <p>신속하게 마음을 전합니다.</p>
+                                    </div>
+                                    <a href="#" class="more"><span>자세히 보기 </span><i
+                                            class="fa-solid fa-arrow-right"></i></a>
+                                </div>
+                            </li>
+                        </ul>
+                    </div><!-- //.slide_visual -->
+                    <div class="pager">
+                        <button type="button" class="left">&larr;</button>
+                        <div class="box">
+                            <div class="txt_box">
+                                <span class="num">1</span>
+                                /
+                                <span class="total">6</span>
+                            </div><!-- //.txt_box -->
+                            <div class="btn_box">
+                                <i class="fa-solid fa-pause"></i>
+                                <!-- <i class="fa-solid fa-play"></i> -->
+                            </div><!--//.btn_box -->
+                        </div><!-- //.box -->
+                        <button type="button" class="right">&rarr;</button>
+                    </div>
+                </div>
+            </div><!-- //.mian_visual -->
+            <section class="info">
+                <h2 class="blind">회사소개</h2>
+                <div class="article_top inner">
+                    <div class="slide">
+                        <div class="swiper">
+                            <ul class="swiper-wrapper">
+                                <li class="swiper-slide"><a href="#">
+                                        <span class="tit">공지사항</span>
+                                        <p class="txt">우체국 치매요양간병보험 안내</p>
+                                        <span class="day">2025-09-12</span>
+                                    </a></li>
+                                <li class="swiper-slide"><a href="#">
+                                        <span class="tit">공지사항</span>
+                                        <p class="txt">제 21대 대통령 취임 기념우표 판매처</p>
+                                        <span class="day">2025-09-09</span>
+                                    </a></li>
+                                <li class="swiper-slide"><a href="#">
+                                        <span class="tit">공지사항</span>
+                                        <p class="txt">우체국 체크카드 동행축제X한가위 이벤트 안내</p>
+                                        <span class="day">2025-09-01</span>
+                                    </a></li>
+                                <li class="swiper-slide"><a href="#">
+                                        <span class="tit">공지사항</span>
+                                        <p class="txt">우체국쇼핑 특산물 4차 신규상품 모집공고</p>
+                                        <span class="day">2025-08-28</span>
+                                    </a></li>
+                                <li class="swiper-slide"><a href="#">
+                                        <span class="tit">공지사항</span>
+                                        <p class="txt">모바일 우편함 회원가입 이벤트 안내</p>
+                                        <span class="day">2025-08-28</span>
+                                    </a></li>
+                                <li class="swiper-slide"><a href="#">
+                                        <span class="tit">공지사항</span>
+                                        <p class="txt">국제우편 창구접수 요금할인 프로모션</p>
+                                        <span class="day">2025-08-08</span>
+                                    </a></li>
+                            </ul>
+                        </div><!-- //.swiper -->
+                    </div><!-- //.slide -->
+                    <a href="#" class="more">더 보기<span>+</span></a>
+                </div><!-- //.article_top -->
+                <div class="article_bottom inner">
+                    <article class="box1 box">
+                        <em>인터넷우체국</em>
+                        <p>
+                            Online
+                            Postal
+                            Platform
+                        </p>
+                        <div class="txt_b">
+                            <span>우체국의 모든 서비스를 한 곳에서,<br>
+                                대한민국 대표 디지털 우정 플랫폼</span>
+                            <a href="#" class="more">
+                                자세히 보기
+                                <i class="fa-solid fa-arrow-right"></i>
+                            </a>
+                        </div><!-- //.txt_b -->
+                    </article>
+                    <div class="box_all">
+                        <div class="box_all_1">
+                            <article class="box2 box">
+                                <em>연간 접수 물량</em>
+                                <p>1,761만+</p>
+                                <img src="img/box.png" alt="box">
+                                <div class="txt_b">
+                                    <span>우편·택배 등<br>
+                                        온라인 접수 처리</span>
+                                    <a href="#" class="more">
+                                        바로가기
+                                        <i class="fa-solid fa-arrow-right"></i>
+                                    </a>
+                                </div><!-- //.txt_b -->
+                            </article>
+                            <article class="box3 box">
+                                <em>온라인 이용률</em>
+                                <p>+2%</p>
+                                <img src="img/arrow.png" class="b_img">
+                                <div class="txt_b">
+                                    <span>2023년 기준<br>
+                                        접수 건수 전년 대비 증가</span>
+                                </div><!-- //.txt_b -->
+                            </article>
+                        </div><!-- //.box_all_1 -->
+                        <div class="box_all_2">
+                            <article class="box4 box">
+                                <em>전체 우편 접수 건수</em>
+                                <p>2.63억+</p>
+                                <div class="txt_b">
+                                    <span>2023년 기준<br>
+                                        우체국 전체 우편물 처리 건수</span>
+                                    <a href="#" class="more">
+                                        자세히 보기
+                                        <i class="fa-solid fa-arrow-right"></i>
+                                    </a>
+                                </div><!-- //.txt_b -->
+                            </article>
+                            <article class="box5 box">
+                                <em>연혁</em>
+                                <p>20+</p>
+                                <img src="img/letter.png" alt="" class="b_img">
+                                <div class="txt_b">
+                                    <span>2000년대 초 서비스 개시<br>
+                                        국민과 함께한 디지털 우정 역사</span>
+                                    <a href="#" class="more">
+                                        연혁
+                                        <i class="fa-solid fa-arrow-right"></i>
+                                    </a>
+                                </div><!-- //.txt_b -->
+                            </article>
+                        </div><!-- //."box_all_2 -->
+
+                    </div><!-- //.box_all -->
+                </div><!-- //.article_bottom -->
+            </section><!-- //.info -->
+            <section class="motion">
+                <div class="inner">
+                    <div class="tit">
+                        <b data-aos="fade-up" data-aos-delay="50">BEYOND THE<br>
+                            POSTAL SERVICE</b>
+                        <h2 data-aos="fade-up" data-aos-delay="250">INTERNET<br>
+                            POST OFFICE</h2>
+                        <p data-aos="fade-up" data-aos-delay="550"><span>국민과 함께하는</span>대한민국 대표 디지털 우정 플랫폼</p>
+                    </div><!-- //.tit -->
+                    <div class="circle_box">
+                        <img src="img/footer2.png" alt="">
+                        <div class="circle1">
+                        </div>
+                        <div class="circle2"></div>
+                    </div><!-- //.circle_box -->
+                </div><!-- //.inner -->
+            </section><!-- //.motion -->
+            <section class="company">
+                <div class="inner">
+                    <h2 class="tit_eng"><span>인터넷우체국</span> 서비스</h2>
+                    <ul>
+                        <li>
+                            <img src="img/img1.png" alt="">
+                            <h3>우편·택배</h3>
+                            <div class="txt">
+                                <em>우편·택배</em>
+                                <p>등기우편, 국제우편, 소포 접수까지 집이나 사무실에서 간편하게 신청할 수 있습니다.
+                                    인터넷우체국은 전국 우체국과 연계되어, 접수부터 배송 추적까지 한눈에 확인할 수 있으며
+                                    빠르고 안전한 배송 서비스를 제공합니다.
+                                    바쁜 일상 속에서도 언제 어디서나 편리하게 우편 업무를 처리할 수 있습니다.
+                                </p>
+                                <a href="#" class="more af">우편·택배 바로가기</a>
+                            </div><!-- //.txt -->
+                        </li>
+                        <li>
+                            <img src="img/img8.png" alt="">
+                            <h3>금융</h3>
+                            <div class="txt">
+                                <em>금융</em>
+                                <p>우체국 예금과 보험은 오랜 시간 국민에게 신뢰받아온 대표 금융 상품입니다.
+                                    인터넷우체국에서는 이러한 금융 서비스를 디지털로 확장하여,
+                                    예금·적금 가입, 보험 조회 및 관리까지 온라인으로 간편하게 이용할 수 있습니다.
+                                    안전한 공공 금융망을 기반으로, 국민 누구나 쉽고 안심할 수 있는 금융 환경을 제공합니다.</p>
+                                <a href="#" class="more af">금융 서비스 바로가기</a>
+                            </div><!-- //.txt -->
+                        </li>
+                        <li>
+                            <img src="img/img9.png" alt="">
+                            <h3>우체국 쇼핑</h3>
+                            <div class="txt">
+                                <em>우체국 쇼핑</em>
+                                <p>전국 각지의 우수한 농수산물과 특산품, 생활필수품을 믿을 수 있는 품질로 제공합니다.
+                                    공공기관이 운영하는 쇼핑 플랫폼으로서, 가격의 합리성과 상품의 신뢰성을 보장하며
+                                    지역 경제 활성화에도 기여하고 있습니다.
+                                    국민 누구나 안심하고 이용할 수 있는 대표 온라인 쇼핑몰입니다.
+                                </p>
+                                <a href="#" class="more af">쇼핑몰 바로가기</a>
+                            </div><!-- //.txt -->
+                        </li>
+                        <li>
+                            <img src="img/phone.png" alt="">
+                            <h3>알뜰폰</h3>
+                            <div class="txt">
+                                <em>알뜰폰</em>
+                                <p>우체국 알뜰폰은 합리적인 요금제와 투명한 서비스 정책으로
+                                    국민들의 통신비 부담을 줄여주는 대표적인 대안 통신 서비스입니다.
+                                    전국 우체국 창구와 온라인을 통해 쉽게 가입할 수 있으며,
+                                    안정적인 품질과 신뢰할 수 있는 고객 지원을 약속합니다
+                                </p>
+                                <a href="#" class="more af">알뜰폰 바로가기</a>
+                            </div><!-- //.txt -->
+                        </li>
+                        <li>
+                            <img src="img/img10.png" alt="">
+                            <h3>물류·배송</h3>
+                            <div class="txt">
+                                <em>물류·배송</em>
+                                <p>인터넷우체국은 전국을 아우르는 물류 네트워크를 기반으로
+                                    국내 소포 배송부터 국제 특송까지 다양한 물류 서비스를 제공합니다.
+                                    신속하고 정확한 배송 추적 시스템을 통해, 고객은 언제든지 안심하고 물품을 맡길 수 있습니다.
+                                    일상 생활부터 글로벌 비즈니스까지 아우르는 종합 물류 서비스입니다.</p>
+                                <a href="#" class="more af">물류 서비스 바로가기</a>
+                            </div><!-- //.txt -->
+                        </li>
+                    </ul>
+                </div><!-- //.inner -->
+            </section><!-- //.company -->
+            <section class="customer con">
+                <div class="inner">
+                    <h2 class="tit_eng"><span>우체국</span> 상품</h2>
+                    <a href="#" class="more"><em>더보기</em><i class="fa-solid fa-arrow-right"></i></a>
+                </div><!-- //.inner -->
+                <div class="slide_wrap swiper">
+                    <div class="swiper-wrapper">
+                        <div class="box swiper-slide">
+                            <a href="#">
+                                <div class="img_box">
+                                    <img src="img/stamp10.png" alt="">
+                                </div><!-- //.img_box -->
+                                <div class="txt_box">
+                                    <em>일반우표</em>
+                                    <p>대한의 자긍심, 태극기</p>
+                                    <span>태극기는 국민 모두의 단결과 희망을 담아내는 우리의 자랑스러운 국기입니다.</span>
+                                    <strong>판매가 : 380원</strong>
+                                </div><!-- //.txt_box -->
+                            </a>
+                        </div><!-- //.box -->
+                        <div class="box swiper-slide">
+                            <a href="#">
+                                <div class="img_box">
+                                    <img src="img/stamp11.png" alt="">
+                                </div><!-- //.img_box -->
+                                <div class="txt_box">
+                                    <em>일반우표</em>
+                                    <p>대한민국의 국화, 무궁화</p>
+                                    <span>무궁화는 예로부터 나라 사랑과 불굴의 의지를 상징해온 우리 민족의 꽃입니다.</span>
+                                    <strong>판매가 : 520원</strong>
+                                </div><!-- //.txt_box -->
+                            </a>
+                        </div><!-- //.box -->
+
+                        <div class="box swiper-slide">
+                            <a href="#">
+                                <div class="img_box">
+                                    <img src="img/stamp3.png" alt="">
+                                </div><!-- //.img_box -->
+                                <div class="txt_box">
+                                    <em>기념우표</em>
+                                    <p>광복 80년, 빛으로 다시 서다</p>
+                                    <span>광복은 자유와 희망의 시작이자, 새로운 길을 향한 국민의 다짐입니다. 80년의 빛나는 정신을 이어갑니다.</span>
+                                    <strong>판매가 : 430원</strong>
+                                </div><!-- //.txt_box -->
+                            </a>
+                        </div><!-- //.box -->
+                        <div class="box swiper-slide">
+                            <a href="#">
+                                <div class="img_box">
+                                    <img src="img/stamp3.jpg" alt="">
+                                </div><!-- //.img_box -->
+                                <div class="txt_box">
+                                    <em>기념우표</em>
+                                    <p>한국의 아름다움, 단청</p>
+                                    <span>단청은 전통 건축의 품격과 한국의 미를 담아낸 소중한 문화유산입니다.</span>
+                                    <strong>판매가 : 1,290원</strong>
+                                </div><!-- //.txt_box -->
+                            </a>
+                        </div><!-- //.box -->
+                        <div class="box swiper-slide">
+                            <a href="#">
+                                <div class="img_box">
+                                    <img src="img/stamp4.jpg" alt="">
+                                </div><!-- //.img_box -->
+                                <div class="txt_box">
+                                    <em>기념우표</em>
+                                    <p>한국 관광 1호, 보문관광단지</p>
+                                    <span>1975년 지정된 대한민국 최초 관광단지로, 아름다운 자연과 다양한 시설을 갖춘 한국 관광의 상징입니다.</span>
+                                    <strong>판매가 : 430원</strong>
+                                </div><!-- //.txt_box -->
+                            </a>
+                        </div><!-- //.box -->
+                        <div class="box swiper-slide">
+                            <a href="#">
+                                <div class="img_box">
+                                    <img src="img/stamp7.jpg" alt="">
+                                </div><!-- //.img_box -->
+                                <div class="txt_box">
+                                    <em>기념우표</em>
+                                    <p>대한민국 고속열차의 발전</p>
+                                    <span>2004년 KTX 개통 이후,고속열차는 발전하며 전국을 반나절 생활권으로 만든 국민 교통의 상징입니다.</span>
+                                    <strong>판매가 : 2,150원</strong>
+                                </div><!-- //.txt_box -->
+                            </a>
+                        </div><!-- //.box -->
+                        <div class="box swiper-slide">
+                            <a href="#">
+                                <div class="img_box">
+                                    <img src="img/card1.jpg" alt="">
+                                </div><!-- //.img_box -->
+                                <div class="txt_box">
+                                    <em>축하카드</em>
+                                    <p>사랑합니다</p>
+                                    <span>마음을 담아 전하는 진심, 감사합니다.</span>
+                                    <strong>판매가 : 1,800원</strong>
+                                </div><!-- //.txt_box -->
+                            </a>
+                        </div><!-- //.box -->
+                        <div class="box swiper-slide">
+                            <a href="#">
+                                <div class="img_box">
+                                    <img src="img/card2.jpg" alt="">
+                                </div><!-- //.img_box -->
+                                <div class="txt_box">
+                                    <em>축하카드</em>
+                                    <p>생일 축하해</p>
+                                    <span>Happy Birthday! 행복한 하루 보내세요!</span>
+                                    <strong>판매가 : 1,800원</strong>
+                                </div><!-- //.txt_box -->
+                            </a>
+                        </div><!-- //.box -->
+                        <div class="box swiper-slide">
+                            <a href="#">
+                                <div class="img_box">
+                                    <img src="img/card3.jpg" alt="">
+                                </div><!-- //.img_box -->
+                                <div class="txt_box">
+                                    <em>축하카드</em>
+                                    <p>좋은 날</p>
+                                    <span>당신의 하루가 행복으로 가득하기를</span>
+                                    <strong>판매가 : 1,800원</strong>
+                                </div><!-- //.txt_box -->
+                            </a>
+                        </div><!-- //.box -->
+                        <div class="box swiper-slide">
+                            <a href="#">
+                                <div class="img_box">
+                                    <img src="img/card4.jpg" alt="">
+                                </div><!-- //.img_box -->
+                                <div class="txt_box">
+                                    <em>축하카드</em>
+                                    <p>꿈을 향한 첫걸음</p>
+                                    <span>당신의 소중한 시작을 축하합니다</span>
+                                    <strong>판매가 : 2,500원</strong>
+                                </div><!-- //.txt_box -->
+                            </a>
+                        </div><!-- //.box -->
+                        <div class="box swiper-slide">
+                            <a href="#">
+                                <div class="img_box">
+                                    <img src="img/card5.jpg" alt="">
+                                </div><!-- //.img_box -->
+                                <div class="txt_box">
+                                    <em>축하카드</em>
+                                    <p>웃음과 행복</p>
+                                    <span>행복을 전하는 가장 아름다운 선물.</span>
+                                    <strong>판매가 : 2,500원</strong>
+                                </div><!-- //.txt_box -->
+                            </a>
+                        </div><!-- //.box -->
+                        <div class="box swiper-slide">
+                            <a href="#">
+                                <div class="img_box">
+                                    <img src="img/card6.jpg" alt="">
+                                </div><!-- //.img_box -->
+                                <div class="txt_box">
+                                    <em>축하카드</em>
+                                    <p>더 많은 기쁜날</p>
+                                    <span>당신 인생에 남은 더 많은 기쁜 날을 위해</span>
+                                    <strong>판매가 : 1,800원</strong>
+                                </div><!-- //.txt_box -->
+                            </a>
+                        </div><!-- //.box -->
+                    </div><!-- //.swiper-wrapper -->
+                </div><!-- //.slide_wrap -->
+            </section><!-- //.customer -->
+            <section class="blog con">
+                <div class="inner">
+                    <h2 class="tit_eng"><span>우체국</span> 쇼핑</h2>
+                    <a href="#" class="more"><em>더보기</em><i class="fa-solid fa-arrow-right"></i></a>
+                </div><!-- //.inner -->
+                <div class="slide_wrap swiper">
+                    <div class="swiper-wrapper">
+                        <div class="box swiper-slide">
+                            <a href="#">
+                                <div class="img_box">
+                                    <img src="img/food1.png" alt="">
+                                </div><!-- //.img_box -->
+                                <div class="txt_box">
+                                    <em>무료배송</em>
+                                    <p>[선물세트] 유명 산지 사과세트 3.6kg</p>
+                                    <div class="txt_p">
+                                        <span>99,000원</span>
+                                    </div>
+                                    <em>20%</em>
+                                    <span>79,000원</span>
+                                </div><!-- //.txt_box -->
+                            </a>
+                        </div><!-- //.box -->
+                        <div class="box swiper-slide">
+                            <a href="#">
+                                <div class="img_box">
+                                    <img src="img/food2.png" alt="">
+                                </div><!-- //.img_box -->
+                                <div class="txt_box">
+                                    <em>무료배송</em>
+                                    <p>[선물세트] 마음을 담은 배세트 7.5kg</p>
+                                    <div class="txt_p">
+                                        <span>89,900원</span>
+                                    </div>
+                                    <em>38%</em>
+                                    <span>54,900원</span>
+                                </div><!-- //.txt_box -->
+                            </a>
+                        </div><!-- //.box -->
+                        <div class="box swiper-slide">
+                            <a href="#">
+                                <div class="img_box">
+                                    <img src="img/food3.png" alt="">
+                                </div><!-- //.img_box -->
+                                <div class="txt_box">
+                                    <em>무료배송</em>
+                                    <p>[선물세트] 보리굴비 특대 세트 2.2kg</p>
+                                    <div class="txt_p">
+                                        <span>269,000원</span>
+                                    </div>
+                                    <em>26%</em>
+                                    <span>199,000원</span>
+                                </div><!-- //.txt_box -->
+                            </a>
+                        </div><!-- //.box -->
+                        <div class="box swiper-slide">
+                            <a href="#">
+                                <div class="img_box">
+                                    <img src="img/food4.png" alt="">
+                                </div><!-- //.img_box -->
+                                <div class="txt_box">
+                                    <em>무료배송</em>
+                                    <p>[선물세트] 횡성축협 한우 1++ 프리미엄</p>
+                                    <div class="txt_p">
+                                        <span>289,000원</span>
+                                    </div>
+                                    <em>24%</em>
+                                    <span>219,000원</span>
+                                </div><!-- //.txt_box -->
+                            </a>
+                        </div><!-- //.box -->
+                        <div class="box swiper-slide">
+                            <a href="#">
+                                <div class="img_box">
+                                    <img src="img/food5.png" alt="">
+                                </div><!-- //.img_box -->
+                                <div class="txt_box">
+                                    <em>무료배송</em>
+                                    <p>[선물세트] 홍영의 붉은대게 어간장 5종</p>
+                                    <div class="txt_p">
+                                        <span>22,000원</span>
+                                    </div>
+                                    <em>28%</em>
+                                    <span>15,840원</span>
+                                </div><!-- //.txt_box -->
+                            </a>
+                        </div><!-- //.box -->
+                        <div class="box swiper-slide">
+                            <a href="#">
+                                <div class="img_box">
+                                    <img src="img/food13.png" alt="">
+                                </div><!-- //.img_box -->
+                                <div class="txt_box">
+                                    <em>무료배송</em>
+                                    <p>[선물세트] 대명임산물세트</p>
+                                    <div class="txt_p">
+                                        <span>75,000원</span>
+                                    </div>
+                                    <em>40%</em>
+                                    <span>45,000원</span>
+                                </div><!-- //.txt_box -->
+                            </a>
+                        </div><!-- //.box -->
+                        <div class="box swiper-slide">
+                            <a href="#">
+                                <div class="img_box">
+                                    <img src="img/food7.png" alt="">
+                                </div><!-- //.img_box -->
+                                <div class="txt_box">
+                                    <em>무료배송</em>
+                                    <p>[특가] 빨강대추방울토마토</p>
+                                    <div class="txt_p">
+                                        <span>17,100원</span>
+                                    </div>
+                                    <em>30%</em>
+                                    <span>11,970원</span>
+                                </div><!-- //.txt_box -->
+                            </a>
+                        </div><!-- //.box -->
+                        <div class="box swiper-slide">
+                            <a href="#">
+                                <div class="img_box">
+                                    <img src="img/food6.PNG" alt="">
+                                </div><!-- //.img_box -->
+                                <div class="txt_box">
+                                    <em>무료배송</em>
+                                    <p>[선물세트] 옥돔&갈치&민어굴비 세트</p>
+                                    <div class="txt_p">
+                                        <span>89,900원</span>
+                                    </div>
+                                    <em>38%</em>
+                                    <span>54,900원</span>
+                                </div><!-- //.txt_box -->
+                            </a>
+                        </div><!-- //.box -->
+                        <div class="box swiper-slide">
+                            <a href="#">
+                                <div class="img_box">
+                                    <img src="img/food9.png" alt="">
+                                </div><!-- //.img_box -->
+                                <div class="txt_box">
+                                    <em>무료배송</em>
+                                    <p>항수옥천 상큼 포도농장 샤인머스켓 2kg</p>
+                                    <div class="txt_p">
+                                        <span>22,900원</span>
+                                    </div>
+                                    <em>17%</em>
+                                    <span>18,900원</span>
+                                </div><!-- //.txt_box -->
+                            </a>
+                        </div><!-- //.box -->
+                        <div class="box swiper-slide">
+                            <a href="#">
+                                <div class="img_box">
+                                    <img src="img/food10.png" alt="">
+                                </div><!-- //.img_box -->
+                                <div class="txt_box">
+                                    <em>무료배송</em>
+                                    <p>[냉장] 국산 손질 오징어 750g(3마리)</p>
+                                    <div class="txt_p">
+                                        <span>17,500</span>
+                                    </div>
+                                    <em>29%</em>
+                                    <span>12,400원</span>
+                                </div><!-- //.txt_box -->
+                            </a>
+                        </div><!-- //.box -->
+                        <div class="box swiper-slide">
+                            <a href="#">
+                                <div class="img_box">
+                                    <img src="img/food11.jpg" alt="">
+                                </div><!-- //.img_box -->
+                                <div class="txt_box">
+                                    <em>무료배송</em>
+                                    <p>[선물세트] 양봉특구 천연 꿀스틱 30포</p>
+                                    <div class="txt_p">
+                                        <span>26,000원</span>
+                                    </div>
+                                    <em>23%</em>
+                                    <span>20,000원</span>
+                                </div><!-- //.txt_box -->
+                            </a>
+                        </div><!-- //.box -->
+                        <div class="box swiper-slide">
+                            <a href="#">
+                                <div class="img_box">
+                                    <img src="img/food12.png" alt="">
+                                </div><!-- //.img_box -->
+                                <div class="txt_box">
+                                    <em>무료배송</em>
+                                    <p>[진짜를 맛보다] 손으로 빚은 쑥개떡 1kg</p>
+                                    <div class="txt_p">
+                                        <span>19,900원</span>
+                                    </div>
+                                    <em>5%</em>
+                                    <span>18,900원</span>
+                                </div><!-- //.txt_box -->
+                            </a>
+                        </div><!-- //.box -->
+                    </div>
+                </div><!-- //.slide_wrap -->
+            </section><!-- //.blog -->
+            <div class="kpssa_mark">
+                <div class="inner">
+                    <a href="#">
+                        <div class="txt_box">
+                            <p><em>우편 고객센터</em>1588-1300</p>
+                            <span>(발신자부담) 평일 09:00 ~ 18:00 토요일 / 공휴일 휴무</span>
+                        </div>
+                        <h2 class="blind2">우편 고객센터</h2>
+                        <div class="img_box">
+                            <img src="img/chat.png" alt="chat">
+                            <img src="img/ai.png" alt="ai">
+                        </div>
+                    </a>
+                </div><!-- //.inner -->
+            </div><!-- //.kpssa_mark -->
+            <section class="contact">
+                <h2 class="blind">우체국 서비스 안내</h2>
+                <div class="inner">
+                    <article>
+                        <a href="#">
+                            <h3>우편번호 찾기</h3>
+                            <p>주소에 맞는 우편번호를<br>간편하게 확인하세요.</p>
+                        </a>
+                    </article>
+                    <article>
+                        <a href="#">
+                            <h3>전국 우체국 안내</h3>
+                            <p>가까운 우체국<br>위치와 정보를 알려드립니다.</p>
+                        </a>
+                    </article>
+                    <article>
+                        <a href="#">
+                            <h3>요금 조회</h3>
+                            <p>우편·택배 요금을<br>빠르고 쉽게 확인하세요.</p>
+                        </a>
+                    </article>
+                    <article>
+                        <a href="#">
+                            <h3>택배 간편 접수</h3>
+                            <p>집이나 사무실에서<br>간편하게 택배를 접수하세요.</p>
+                        </a>
+                    </article>
+                </div><!-- //.inner -->
+            </section><!-- //.contact -->
+        </main>
+        <footer>
+            <div class="inner">
+                <div class="f_top">
+                    <h2 class="blind">인터넷 우체국 정보</h2>
+                    <div class="logo_box">
+                        <div class="logo"><img src="./img/footerlogo.png" alt=""></div>
+                        <div class="logo_b">
+                            <a href="#">인터넷우체국소개</a>
+                            <a href="#">전국 우체국 이용안내</a>
+                            <a href="#">이용약관</a>
+                            <a href="#">웹접근성정책</a>
+                        </div><!-- //logo_b -->
+                    </div><!-- //.logo_box -->
+                    <div class="btn_box">
+                        <div class="sns">
+                            <a href="#"><i class="fa-solid fa-b"></i></a>
+                            <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+                        </div><!-- //.sns -->
+                        <div class="selcet_box">
+                            <button type="button">관련사이트 <i class="fa-solid fa-angle-up"></i></button>
+                            <ul>
+                                <li><a href="#">관련사이트1</a></li>
+                                <li><a href="#">관련사이트2</a></li>
+                                <li><a href="#">관련사이트3</a></li>
+                                <li><a href="#">관련사이트4</a></li>
+                                <li><a href="#">관련사이트5</a></li>
+                                <li><a href="#">관련사이트6</a></li>
+                                <li><a href="#">관련사이트7</a></li>
+                                <li><a href="#">관련사이트8</a></li>
+                                <li><a href="#">관련사이트9</a></li>
+                            </ul>
+                        </div><!-- //.selcet_box -->
+                        <div class="top">
+                            <a href="#">top <i class="fa-solid fa-arrow-up"></i></a>
+                        </div>
+                    </div><!-- //.btn_box -->
+                </div><!-- //.f_top -->
+                <div class="f_bottom">
+                    <h2 class="blind">주소 및 개인정보처리방침</h2>
+                    <ul class="left">
+                        <li>
+                            <em>(우) 58323 전라남도 나주시 정보화길 1 (빛가람동)</em>
+                            <div class="f_con1">
+                                <span>우편고객센터 :1588-1300(발신자부담) </span>
+                                <span>이메일 : help@posa.or.kr</span>
+                            </div>
+                        </li>
+                    </ul><!-- //.left -->
+                    <div class="right">
+                        <p class="f_con1">
+                            <span>배다남</span>
+                            <span>사업자등록번호 206-83-02050</span>
+                            <a href="#">개인정보처리방침</a>
+                        </p>
+                        <p class="f_copy">
+                            Copyright(c) 2016. ePOST all rights reserved.
+                        </p>
+                    </div><!-- //.right -->
+                </div><!-- //.f_bottom -->
+            </div><!-- //. inner -->
+        </footer>
+    </div>
+</body>
+
+</html>
