@@ -27,7 +27,7 @@
         <a href="#hero" class="home_dot active"></a>
         <a href="#works">Works</a>
         <a href="#about">About</a>
-        <a href="#">Contact</a>
+        <a href="#contact">Contact</a>
     </nav>
 
     <!-- Hero Section -->
@@ -107,8 +107,8 @@
                                 </div>
                             </div>
                             <div class="project_buttons">
-                                <button class="project_btn">View Site</button>
-                                <button class="project_btn">Case Study</button>
+                                <a href="" class="project_btn">View Site</a>
+                                <a href="" class="project_btn">Landing</a>
                             </div>
                         </div>
                         <div class="project_image">
@@ -143,8 +143,8 @@
                                 </div>
                             </div>
                             <div class="project_buttons">
-                                <button class="project_btn">View Demo</button>
-                                <button class="project_btn">GitHub</button>
+                                <a href="" class="project_btn">View Site</a>
+                                <a href="" class="project_btn">Landing</a>
                             </div>
                         </div>
                         <div class="project_image">
@@ -179,8 +179,8 @@
                                 </div>
                             </div>
                             <div class="project_buttons">
-                                <button class="project_btn">Prototype</button>
-                                <button class="project_btn">Documentation</button>
+                                <a href="" class="project_btn">Prototype</a>
+                                <a href="" class="project_btn">Landing</a>
                             </div>
                         </div>
                         <div class="project_image">
@@ -215,8 +215,8 @@
                                 </div>
                             </div>
                             <div class="project_buttons">
-                                <button class="project_btn">App Store</button>
-                                <button class="project_btn">Figma File</button>
+                                <a href="" class="project_btn">App Store</a>
+                                <a href="" class="project_btn">Landing</a>
                             </div>
                         </div>
                         <div class="project_image">
@@ -247,7 +247,125 @@
         <div class="about_container">
             <h2 class="section_title">ABOUT</h2>
 
+            <!-- 빛 오버레이 -->
+            <div class="light_overlay"></div>
 
+            <div class="about_content">
+                <h3 class="keywords_subtitle">Keywords</h3>
+                <div class="keywords_grid">
+                    <div class="keyword_card" data-index="0">
+                        <div class="keyword_light"></div>
+                        <div class="keyword_front">
+                            <h3>INSIGHT</h3>
+                        </div>
+                        <div class="keyword_detail">
+                            <h3>INSIGHT</h3>
+                            <p>사용자 행동을 깊이 이해하고<br>데이터 기반의 통찰력으로<br>문제의 본질을 파악합니다</p>
+                        </div>
+                    </div>
+
+                    <div class="keyword_card" data-index="1">
+                        <div class="keyword_light"></div>
+                        <div class="keyword_front">
+                            <h3>CLARITY</h3>
+                        </div>
+                        <div class="keyword_detail">
+                            <h3>CLARITY</h3>
+                            <p>복잡한 정보를 명확하게 정리하고<br>직관적인 인터페이스로<br>사용자 경험을 단순화합니다</p>
+                        </div>
+                    </div>
+
+                    <div class="keyword_card" data-index="2">
+                        <div class="keyword_light"></div>
+                        <div class="keyword_front">
+                            <h3>CRAFT</h3>
+                        </div>
+                        <div class="keyword_detail">
+                            <h3>CRAFT</h3>
+                            <p>디테일에 집중하며<br>완성도 높은 결과물을<br>만들어냅니다</p>
+                        </div>
+                    </div>
+
+                    <div class="keyword_card" data-index="3">
+                        <div class="keyword_light"></div>
+                        <div class="keyword_front">
+                            <h3>GROWTH</h3>
+                        </div>
+                        <div class="keyword_detail">
+                            <h3>GROWTH</h3>
+                            <p>끊임없이 학습하고<br>새로운 기술을 탐구하며<br>지속적으로 성장합니다</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Me Section -->
+    <section class="aboutme_section" id="aboutme">
+        <div class="stars_container"></div>
+
+        <!-- falling_icons_container를 여기로 이동 -->
+        <div class="falling_icons_container"></div>
+
+        <div class="aboutme_container">
+            <div class="aboutme_content">
+                <!-- 왼쪽: 프로필 정보 -->
+                <div class="aboutme_left">
+                    <div>
+                        <h2 class="aboutme_name">CHOI U JUNG</h2>
+                        <p class="aboutme_title">UX · UI DESIGNER</p>
+                    </div>
+
+                    <p class="aboutme_description">
+                        어두운 문제 속에서 핵심을 밝혀내고,<br>
+                        작은 디테일을 살아 완성도를 만들어갑니다.<br>
+                        배움과 실험을 통해 계속 성장하고 있습니다.
+                    </p>
+
+                    <div class="aboutme_info">
+                        <div class="aboutme_info_group">
+                            <h3 class="aboutme_info_title">CHARACTER</h3>
+                            <p class="aboutme_info_content">Ownership · Flexibility<br>Execution · Focus · Detail</p>
+                        </div>
+
+                        <div class="aboutme_info_group">
+                            <h3 class="aboutme_info_title">TOOL</h3>
+                            <p class="aboutme_info_content">
+                                Figma · HTML · CSS<br>
+                                JavaScript · GSAP · GitHub
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 오른쪽: 비디오 -->
+                <div class="aboutme_right">
+                    <div class="aboutme_video_wrapper">
+                        <video autoplay loop muted playsinline>
+                            <source src="./asset/vid/vid1.mp4" type="video/mp4">
+                        </video>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact_section" id="contact">
+        <div class="stars_container"></div>
+        <div class="city_background"></div>
+
+        <div class="contact_container">
+            <div class="contact_content">
+                <h2 class="contact_main_title">See you in the light.</h2>
+                <p class="contact_sub_title">Thank You</p>
+
+                <div class="contact_info">
+                    <div class="contact_item email">dnwjd3021@gmail.com</div>
+                    <div class="contact_item github">GitHub: github.com/woojung</div>
+                </div>
+            </div>
         </div>
     </section>
 </body>

@@ -26,6 +26,7 @@ body.scroll_locked {
     transform: translate(-50%, -50%);
     transition: width 0.5s, height 0.5s, box-shadow 0.5s;
     box-shadow: 0 0 15px rgba(255, 255, 255, 0.5), 0 0 30px rgba(255, 255, 255, 0.3);
+    z-index: 10000;
 }
 
 .custom_cursor.small {
@@ -47,7 +48,7 @@ nav {
     padding: 50px 80px;
     display: flex;
     align-items: center;
-    gap: 40px;
+    gap: 50px;
     z-index: 1000;
 }
 
@@ -544,4 +545,585 @@ nav .home_dot::after {
 .slide_counter .total {
     font-size: 18px;
     color: rgba(255, 255, 255, 0.5);
+}
+
+/* ========== About Section ========== */
+.about_section {
+    position: relative;
+    min-height: 100vh;
+    width: 100%;
+    overflow: hidden;
+}
+
+.about_container {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: sticky;
+    top: 0;
+}
+
+/* About 타이틀 위치 */
+.about_section .section_title {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    opacity: 0;
+    transform: translate(-50%, -50%);
+    transition: all 1s ease;
+}
+
+/* 빛 오버레이 - Works와 동일 */
+.about_section .light_overlay {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 0px;
+    height: 0px;
+    border-radius: 50%;
+    background: radial-gradient(circle,
+            rgba(255, 255, 255, 0.5) 0%,
+            rgba(255, 255, 255, 0.45) 10%,
+            rgba(255, 255, 255, 0.38) 20%,
+            rgba(255, 255, 255, 0.28) 35%,
+            rgba(255, 255, 255, 0.18) 50%,
+            rgba(255, 255, 255, 0.08) 65%,
+            rgba(255, 255, 255, 0.03) 80%,
+            transparent 100%);
+    opacity: 0;
+    pointer-events: none;
+    filter: blur(40px);
+}
+
+.about_content {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+}
+
+.keywords_subtitle {
+    position: absolute;
+    top: 100px;
+    left: 10%;
+    font-family: 'Playfair Display', serif;
+    font-size: 48px;
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.8);
+    letter-spacing: 4px;
+    text-align: left;
+    opacity: 0;
+    text-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+}
+
+
+/* 키워드 카드 그리드 - 간격 증가 */
+.keywords_grid {
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(4, 320px);
+    gap: 100px;
+    width: 100%;
+    max-width: 1800px;
+    margin: 0;
+    perspective: 1500px;
+}
+
+.keyword_card {
+    position: relative;
+    width: 320px;
+    height: 320px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0.05));
+    box-shadow: 0 0 5px rgba(255, 255, 255, 0.5), 0 0 5px rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(10px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    opacity: 0;
+    transform: scale(0.5) rotateY(-90deg) translateZ(-200px);
+    transform-style: preserve-3d;
+    transition: background 0.3s, box-shadow 0.3s;
+}
+
+.keyword_card:hover {
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.22), rgba(255, 255, 255, 0.08));
+    box-shadow: 0 0 30px rgba(255, 255, 255, 0.4), 0 0 60px rgba(255, 255, 255, 0.2);
+}
+
+.keyword_card.active {
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.12));
+    box-shadow: 0 0 50px rgba(255, 255, 255, 0.5), 0 0 100px rgba(255, 255, 255, 0.3);
+    z-index: 50;
+}
+
+.keyword_front {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 1;
+    transition: opacity 0.4s;
+}
+
+.keyword_card.active .keyword_front {
+    opacity: 0;
+}
+
+.keyword_front h3 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 28px;
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.95);
+    letter-spacing: 3px;
+    text-align: center;
+    text-transform: uppercase;
+    text-shadow: 0 0 15px rgba(255, 255, 255, 0.6);
+}
+
+.keyword_detail {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px;
+    opacity: 0;
+    transition: opacity 0.4s;
+}
+
+.keyword_card.active .keyword_detail {
+    opacity: 1;
+}
+
+.keyword_detail h3 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 32px;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 1);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    text-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
+}
+
+.keyword_detail p {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 15px;
+    font-weight: 300;
+    color: rgba(255, 255, 255, 0.85);
+    line-height: 1.8;
+    text-align: center;
+    letter-spacing: 0.5px;
+}
+
+/* 반응형 */
+@media (max-width: 1200px) {
+    .keywords_grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 50px;
+    }
+}
+
+@media (max-width: 768px) {
+    .keywords_grid {
+        grid-template-columns: 1fr;
+        gap: 50px;
+        padding: 0 20px;
+    }
+}
+
+
+/* 반응형 */
+@media (max-width: 1200px) {
+    .keywords_grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 50px;
+    }
+}
+
+@media (max-width: 768px) {
+    .keywords_grid {
+        grid-template-columns: 1fr;
+        gap: 50px;
+        padding: 0 20px;
+    }
+
+    .subsection_title {
+        opacity: 1;
+        /* 초기 보이게 설정 */
+        font-size: 60px;
+    }
+}
+
+/* ========== About Me Section ========== */
+.aboutme_section {
+    position: relative;
+    min-height: 100vh;
+    width: 100%;
+    background: linear-gradient(180deg, #0B0D17 0%, #0F1324 50%, #0B0D17 100%);
+    background-attachment: fixed;
+    overflow: hidden;
+}
+
+/* About Me의 light_overlay는 사용하지 않음 */
+
+.aboutme_container {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.aboutme_content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 1800px;
+    gap: 150px;
+    padding: 0 10%;
+}
+
+/* 왼쪽: 프로필 정보 */
+.aboutme_left {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+}
+
+.aboutme_name {
+    font-family: 'Playfair Display', serif;
+    font-size: 120px;
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.95);
+    letter-spacing: 6px;
+    line-height: 1.1;
+    margin-bottom: 20px;
+}
+
+.aboutme_title {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 36px;
+    font-weight: 300;
+    color: rgba(255, 255, 255, 0.8);
+    letter-spacing: 3px;
+    margin-bottom: 0;
+}
+
+.aboutme_description {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 20px;
+    font-weight: 300;
+    color: rgba(255, 255, 255, 0.75);
+    line-height: 1.8;
+    margin-bottom: 0;
+}
+
+.aboutme_info {
+    display: flex;
+    gap: 100px;
+    align-items: flex-start;
+}
+
+.aboutme_info_group {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.aboutme_info_title {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 24px;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.9);
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    margin-bottom: 0;
+}
+
+.aboutme_info_content {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 18px;
+    font-weight: 300;
+    color: rgba(255, 255, 255, 0.7);
+    line-height: 1.8;
+}
+
+/* 오른쪽: 비디오 */
+.aboutme_right {
+    flex: 0 0 550px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.aboutme_video_wrapper {
+    position: relative;
+    width: 550px;
+    height: 550px;
+    border-radius: 50%;
+    overflow: hidden;
+    box-shadow: 0 0 60px rgba(255, 255, 255, 0.2),
+        0 0 120px rgba(255, 255, 255, 0.1);
+}
+
+.aboutme_video_wrapper video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Falling Icons - fixed로 설정하여 About Me ~ Contact까지 보이게 */
+.falling_icons_container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    z-index: 5;
+    opacity: 0.7;
+    pointer-events: auto;
+    display: none;
+    /* 초기에는 숨김 */
+}
+
+.falling_icons_container.active {
+    display: block;
+    /* 아이콘 떨어질 때 표시 */
+}
+
+.falling_icons_container canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.6)) drop-shadow(0 0 15px rgba(255, 255, 255, 0.4)) drop-shadow(0 0 25px rgba(255, 255, 255, 0.2));
+    pointer-events: auto;
+    cursor: pointer;
+}
+
+/* 반응형 */
+@media (max-width: 1200px) {
+    .aboutme_content {
+        flex-direction: column;
+        gap: 60px;
+    }
+
+    .aboutme_name {
+        font-size: 90px;
+    }
+
+    .aboutme_title {
+        font-size: 28px;
+    }
+
+    .aboutme_info {
+        flex-direction: column;
+        gap: 30px;
+    }
+
+    .aboutme_right {
+        flex: 0 0 400px;
+    }
+
+    .aboutme_video_wrapper {
+        width: 400px;
+        height: 400px;
+    }
+}
+
+@media (max-width: 768px) {
+    .aboutme_name {
+        font-size: 60px;
+    }
+
+    .aboutme_title {
+        font-size: 22px;
+    }
+
+    .aboutme_description {
+        font-size: 16px;
+    }
+
+    .aboutme_right {
+        flex: 0 0 300px;
+    }
+
+    .aboutme_video_wrapper {
+        width: 300px;
+        height: 300px;
+    }
+}
+
+/* ========== Contact Section ========== */
+.contact_section {
+    position: relative;
+    min-height: 100vh;
+    width: 100%;
+    /* ✅ 배경색을 위 섹션과 동일하게 변경 */
+    background: linear-gradient(180deg, #0B0D17 0%, #0F1324 50%, #0B0D17 100%);
+    background-attachment: fixed;
+    overflow: hidden;
+    opacity: 0.3;
+    /* 초기 상태를 어둡게 */
+    transition: opacity 1s ease;
+}
+
+.contact_section.visible {
+    opacity: 1;
+    /* 스크롤 시 밝아짐 */
+}
+
+.contact_container {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 0 10%;
+    position: sticky;
+    top: 0;
+}
+
+.contact_content {
+    position: relative;
+    opacity: 0;
+    z-index: 2;
+    transition: opacity 1s ease 0.3s;
+    /* 0.3초 지연 후 fade in */
+}
+
+.contact_section.visible .contact_content {
+    opacity: 1;
+}
+
+.contact_main_title {
+    font-family: 'Playfair Display', serif;
+    font-size: 140px;
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.95);
+    letter-spacing: 6px;
+    line-height: 1.1;
+    margin-bottom: 40px;
+    text-shadow:
+        0 0 10px rgba(255, 255, 255, 0.8),
+        0 0 20px rgba(255, 255, 255, 0.6),
+        0 0 30px rgba(255, 255, 255, 0.4),
+        0 0 40px rgba(255, 255, 255, 0.2);
+    animation: textGlow 3s ease-in-out infinite alternate;
+}
+
+@keyframes textGlow {
+    0% {
+        text-shadow:
+            0 0 10px rgba(255, 255, 255, 0.8),
+            0 0 20px rgba(255, 255, 255, 0.6),
+            0 0 30px rgba(255, 255, 255, 0.4),
+            0 0 40px rgba(255, 255, 255, 0.2);
+    }
+
+    100% {
+        text-shadow:
+            0 0 15px rgba(255, 255, 255, 1),
+            0 0 30px rgba(255, 255, 255, 0.8),
+            0 0 45px rgba(255, 255, 255, 0.6),
+            0 0 60px rgba(255, 255, 255, 0.4);
+    }
+}
+
+.contact_sub_title {
+    font-family: 'Playfair Display', serif;
+    font-size: 60px;
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.9);
+    letter-spacing: 4px;
+    margin-bottom: 80px;
+    text-shadow:
+        0 0 8px rgba(255, 255, 255, 0.6),
+        0 0 15px rgba(255, 255, 255, 0.4),
+        0 0 20px rgba(255, 255, 255, 0.2);
+}
+
+.contact_info {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.contact_item {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 20px;
+    font-weight: 300;
+    color: rgba(255, 255, 255, 0.85);
+    letter-spacing: 0.5px;
+    transition: color 0.3s;
+}
+
+.contact_item:hover {
+    color: rgba(255, 255, 255, 1);
+}
+
+.contact_item::before {
+    content: '';
+    width: 24px;
+    height: 24px;
+    flex-shrink: 0;
+}
+
+.contact_item.email::before {
+    content: '✉';
+    font-size: 24px;
+}
+
+
+.contact_item.github::before {
+    content: '💻';
+    font-size: 24px;
+}
+
+/* Contact 배경 - Hero와 동일하지만 건물만 밝게 */
+.contact_section .city_background {
+    position: absolute;
+    bottom: -8%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    height: 70%;
+    background-image: url('../asset/img/bg.png');
+    background-size: cover;
+    background-position: center bottom;
+    background-repeat: no-repeat;
+    /* ✅ 초기 opacity 0 */
+    opacity: 0;
+    /* ✅ 건물만 살짝 밝게 */
+    filter: brightness(1.5) contrast(1.3);
+    /* ✅ 부드러운 전환 추가 */
+    transition: opacity 1s ease;
+}
+
+/* Contact 별 - 더 많이 */
+.contact_section .stars_container {
+    opacity: 1;
 }
