@@ -730,27 +730,25 @@ function setup_contact_transition() {
 
 // ========== Contact 아이콘 떨어지기 ==========
 function setup_contact_icons() {
+    if (typeof ScrollTrigger === 'undefined') return;
+
     const contactSection = document.querySelector('.contact_section');
     if (!contactSection) return;
 
     let iconsStarted = false;
 
-    // Contact 섹션이 visible 클래스를 받으면 2초 후 아이콘 시작
-    const observer = new MutationObserver((mutations) => {
-        mutations.forEach((mutation) => {
-            if (mutation.attributeName === 'class') {
-                if (contactSection.classList.contains('visible') && !iconsStarted) {
-                    iconsStarted = true;
-                    // 2초 후 아이콘 떨어지기 시작 (타이틀 애니메이션 완료 후)
-                    setTimeout(() => {
-                        createContactIcons();
-                    }, 2000);
-                }
+    // ✅ 참고 코드처럼 30% 지점에서 시작
+    ScrollTrigger.create({
+        trigger: contactSection,
+        start: "top 70%", // About Me의 30% threshold와 유사하게
+        once: true,
+        onEnter: () => {
+            if (!iconsStarted) {
+                iconsStarted = true;
+                createContactIcons();
             }
-        });
+        }
     });
-
-    observer.observe(contactSection, { attributes: true });
 }
 
 function createContactIcons() {
@@ -780,9 +778,9 @@ function createContactIcons() {
 
     const objects = [];
     let imagesLoaded = 0;
-    const gravity = 0.8; // ✅ 0.4 → 0.8 (2배 더 빠르게!)
-    const bounce = 0.6; // ✅ 0.5 → 0.6 (더 통통 튀게)
-    const friction = 0.96; // ✅ 0.97 → 0.96
+    const gravity = 0.08; // ✅ 눈처럼 천천히 (0.18 → 0.08)
+    const bounce = 0.3; // ✅ 더 부드럽게 (0.4 → 0.3)
+    const friction = 0.99; // ✅ 더 부드럽게 (0.98 → 0.99)
 
     // 아이콘 로드
     iconPaths.forEach((path, index) => {
@@ -801,35 +799,35 @@ function createContactIcons() {
             }
         };
 
-        const size = 40 + Math.random() * 25;
+        const size = 50 + Math.random() * 30;
         objects.push({
             type: 'icon',
             img: img,
-            x: Math.random() * canvas.width,
-            y: -100 - (index * 30), // ✅ 간격 더 좁힘
+            x: Math.random() * (canvas.width - size),
+            y: -100 - Math.random() * 500 - (index * 80),
             size: size,
-            velocityX: (Math.random() - 0.5) * 3, // ✅ 2 → 3 (좌우 속도 증가)
-            velocityY: Math.random() * 4 + 3, // ✅ 3~7 속도로 빠르게 시작!
+            velocityX: (Math.random() - 0.5) * 0.8, // ✅ 좌우 움직임 더 느리게 (1.5 → 0.8)
+            velocityY: 0,
             rotation: Math.random() * Math.PI * 2,
-            rotationSpeed: (Math.random() - 0.5) * 0.15, // ✅ 0.12 → 0.15
-            opacity: 0.8 + Math.random() * 0.2
+            rotationSpeed: (Math.random() - 0.5) * 0.05, // ✅ 회전 더 느리게 (0.1 → 0.05)
+            opacity: 0.85 + Math.random() * 0.15
         });
     });
 
-    // Orb 추가 (더 적게)
-    const orbCount = 15;
+    // Orb 추가 - 참고 코드와 동일한 개수 (20~25개)
+    const orbCount = 20 + Math.floor(Math.random() * 6);
     for (let i = 0; i < orbCount; i++) {
-        const size = 50 + Math.random() * 40;
+        const size = 60 + Math.random() * 50;
         objects.push({
             type: 'orb',
-            x: Math.random() * canvas.width,
-            y: -100 - (i * 25), // ✅ 간격 더 좁힘
+            x: Math.random() * (canvas.width - size),
+            y: -100 - Math.random() * 700 - (i * 60),
             size: size,
-            velocityX: (Math.random() - 0.5) * 3, // ✅ 2 → 3
-            velocityY: Math.random() * 4 + 3, // ✅ 3~7 속도로 빠르게!
-            opacity: 0.4 + Math.random() * 0.3,
+            velocityX: (Math.random() - 0.5) * 0.8, // ✅ 좌우 움직임 더 느리게 (1.5 → 0.8)
+            velocityY: 0,
+            opacity: 0.45 + Math.random() * 0.35,
             twinklePhase: Math.random() * Math.PI * 2,
-            twinkleSpeed: 0.04 + Math.random() * 0.04 // ✅ 0.03 → 0.04
+            twinkleSpeed: 0.02 + Math.random() * 0.02 // ✅ 반짝임도 더 느리게 (0.03 → 0.02)
         });
     }
 
@@ -849,6 +847,16 @@ function createContactIcons() {
         ctx.fillStyle = gradient;
         ctx.beginPath();
         ctx.arc(orb.x, orb.y, orb.size / 2, 0, Math.PI * 2);
+        ctx.fill();
+
+        // ✅ 참고 코드처럼 코어 추가
+        const coreGradient = ctx.createRadialGradient(orb.x, orb.y, 0, orb.x, orb.y, orb.size / 4);
+        coreGradient.addColorStop(0, 'rgba(255, 255, 255, 1)');
+        coreGradient.addColorStop(1, 'rgba(255, 255, 255, 0)');
+
+        ctx.fillStyle = coreGradient;
+        ctx.beginPath();
+        ctx.arc(orb.x, orb.y, orb.size / 4, 0, Math.PI * 2);
         ctx.fill();
 
         ctx.restore();
